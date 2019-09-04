@@ -27,9 +27,8 @@ class Player {
     } else {
       this.items[item]--;
     }
-    switch (item) {
-      case: 'torch'
-    }
+
+    return item;
   }
 
   getLocation() {
