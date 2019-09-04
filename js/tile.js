@@ -175,112 +175,111 @@ var tile45 =
 var tile46 =
   new Tile('tile46', { 'left': 47, 'right': 45 });
 var tile47 =
-  new Tile('tile47', { 'up': 0, 'down': 5 });
+  new Tile('tile47', { 'left': 48, 'right': 46, 'down': 56 });
 var tile48 =
-  new Tile('tile48', { 'up': 0, 'down': 6 });
+  new Tile('tile48', { 'left': 49, 'right': 47 });
 var tile49 =
-  new Tile('tile49', { 'up': 0, 'down': 7 });
+  new Tile('tile49', { 'left': 50, 'right': 48 });
 var tile50 =
-  new Tile('tile50', { 'up': 0, 'down': 8 });
+  new Tile('tile50', { 'up': 28, 'left': 51, 'right': 49 });
 var tile51 =
-  new Tile('tile51', { 'up': 1, 'down': 9 });
+  new Tile('tile51', { 'left': 52, 'right': 50 });
 var tile52 =
-  new Tile('tile52', { 'up': 2, 'down': 12 });
+  new Tile('tile52', { 'left': 29, 'right': 51 });
 var tile53 =
-  new Tile('tile53', { 'up': 3, 'down': 15 });
+  new Tile('tile53', { 'up': 29, 'down': 57 });
 var tile54 =
-  new Tile('tile54', { 'up': 4, 'down': 18 });
+  new Tile('tile54', { 'up': 35, 'down': 65 });
 var tile55 =
-  new Tile('tile55', { 'up': 5, 'left': 10, 'right': 20 });
+  new Tile('tile55', { 'up': 41, 'down': 73 });
 var tile56 =
-  new Tile('tile56', { 'left': 11, 'right': 9 });
+  new Tile('tile56', { 'up': 47, 'down': 81 });
 var tile57 =
-  new Tile('tile57', { 'left': 12, 'right': 10 });
+  new Tile('tile57', { 'up': 53, 'left': 58, 'right': 88 });
 var tile58 =
-  new Tile('tile58', { 'up': 6, 'left': 13, 'right': 11 });
+  new Tile('tile58', { 'left': 59, 'right': 57 });
 var tile59 =
-  new Tile('tile59', { 'left': 14, 'right': 12, 'down': 22 });
+  new Tile('tile59', { 'left': 60, 'right': 57 });
 var tile60 =
-  new Tile('tile60', { 'left': 15, 'right': 13, 'down': 22 });
+  new Tile('tile60', { 'left': 61, 'right': 59 });
 var tile61 =
-  new Tile('tile61', { 'up': 7, 'left': 16, 'right': 14 });
+  new Tile('tile61', { 'left': 62, 'right': 60, 'down': 68 });
 var tile62 =
-  new Tile('tile62', { 'left': 17, 'right': 15, 'down': 23 });
+  new Tile('tile62', { 'left': 63, 'right': 61, });
 var tile63 =
-  new Tile('tile63', { 'left': 18, 'right': 16, 'down': 23 });
+  new Tile('tile63', { 'left': 64, 'right': 62, });
 var tile64 =
-  new Tile('tile64', { 'up': 8, 'left': 19, 'right': 17 });
+  new Tile('tile64', { 'left': 65, 'right': 63 });
 var tile65 =
-  new Tile('tile65', { 'left': 20, 'right': 18, 'down': 24 });
+  new Tile('tile65', { 'up': 54, 'left': 66, 'right': 64 });
 var tile66 =
-  new Tile('tile66', { 'left': 9, 'right': 19, 'down': 24 });
+  new Tile('tile66', { 'left': 67, 'right': 65 });
 var tile67 =
-  new Tile('tile67', { 'left': 11, 'right': 10 });
+  new Tile('tile67', { 'left': 68, 'right': 66 });
 var tile68 =
-  new Tile('tile68', { 'left': 14, 'right': 13 });
+  new Tile('tile68', { 'left': 69, 'right': 68 });
 var tile69 =
-  new Tile('tile69', { 'left': 17, 'right': 16 });
+  new Tile('tile69', { 'left': 70, 'right': 68, 'down': 90 });
 var tile70 =
-  new Tile('tile70', { 'left': 20, 'right': 19 });
+  new Tile('tile70', { 'left': 71, 'right': 69 });
 var tile71 =
-  new Tile('tile71', { 'left': 14, 'right': 13 });
+  new Tile('tile71', { 'left': 72, 'right': 70 });
 var tile72 =
-  new Tile('tile72', { 'left': 17, 'right': 16 });
+  new Tile('tile72', { 'left': 73, 'right': 72 });
 var tile73 =
-  new Tile('tile73', { 'left': 20, 'right': 19 });
+  new Tile('tile73', { 'up': 55, 'left': 74, 'right': 72 });
 var tile74 =
-  new Tile('tile74', { 'left': 14, 'right': 13 });
+  new Tile('tile74', { 'left': 75, 'right': 73 });
 var tile75 =
-  new Tile('tile75', { 'left': 17, 'right': 16 });
+  new Tile('tile75', { 'left': 76, 'right': 74 });
 var tile76 =
-  new Tile('tile76', { 'left': 20, 'right': 19 });
+  new Tile('tile76', { 'left': 77, 'right': 75 });
 var tile77 =
-  new Tile('tile77', { 'left': 14, 'right': 13 });
+  new Tile('tile77', { 'left': 78, 'right': 76, 'down': 91 });
 var tile78 =
-  new Tile('tile78', { 'left': 17, 'right': 16 });
+  new Tile('tile78', { 'left': 79, 'right': 77 });
 var tile79 =
-  new Tile('tile79', { 'left': 20, 'right': 19 });
+  new Tile('tile79', { 'left': 80, 'right': 78 });
 var tile80 =
-  new Tile('tile80', { 'left': 14, 'right': 13 });
+  new Tile('tile80', { 'left': 81, 'right': 79 });
 var tile81 =
-  new Tile('tile81', { 'left': 17, 'right': 16 });
+  new Tile('tile81', { 'up': 56, 'left': 82, 'right': 80 });
 var tile82 =
-  new Tile('tile82', { 'left': 20, 'right': 19 });
+  new Tile('tile82', { 'left': 83, 'right': 81 });
 var tile83 =
-  new Tile('tile83', { 'left': 14, 'right': 13 });
+  new Tile('tile83', { 'left': 84, 'right': 82 });
 var tile84 =
-  new Tile('tile84', { 'left': 17, 'right': 16 });
+  new Tile('tile84', { 'left': 85, 'right': 83});
 var tile85 =
-  new Tile('tile85', { 'left': 20, 'right': 19 });
+  new Tile('tile85', { 'left': 86, 'right': 84, 'down': 92 });
 var tile86 =
-  new Tile('tile86', { 'left': 14, 'right': 13 });
+  new Tile('tile86', { 'left': 87, 'right': 85 });
 var tile87 =
-  new Tile('tile87', { 'left': 17, 'right': 16 });
+  new Tile('tile87', { 'left': 88, 'right': 86 });
 var tile88 =
-  new Tile('tile88', { 'left': 20, 'right': 19 });
+  new Tile('tile88', { 'left': 57, 'right': 87 });
 var tile89 =
-  new Tile('tile89', { 'left': 14, 'right': 13 });
+  new Tile('tile89', { 'up': 61, 'down': 93 });
 var tile90 =
-  new Tile('tile90', { 'left': 17, 'right': 16 });
+  new Tile('tile90', { 'up': 69, 'down': 94 });
 var tile91 =
-  new Tile('tile92', { 'left': 20, 'right': 19 });
+  new Tile('tile92', { 'up': 85, 'down': 96 });
 var tile93 =
-  new Tile('tile93', { 'left': 17, 'right': 16 });
+  new Tile('tile93', { 'up': 89, 'down': 97 });
 var tile94 =
-  new Tile('tile94', { 'left': 20, 'right': 19 });
+  new Tile('tile94', { 'up': 90, 'down': 98 });
 var tile95 =
-  new Tile('tile95', { 'left': 14, 'right': 13 });
+  new Tile('tile95', { 'up': 91, 'down': 99 });
 var tile96 =
-  new Tile('tile96', { 'left': 17, 'right': 16 });
+  new Tile('tile96', { 'up': 92, 'down': 100 });
 var tile97 =
-  new Tile('tile97', { 'left': 20, 'right': 19 });
+  new Tile('tile97', { 'up': 93 });
 var tile98 =
-  new Tile('tile98', { 'left': 14, 'right': 13 });
+  new Tile('tile98', { 'up': 94 });
 var tile99 =
-  new Tile('tile99', { 'left': 17, 'right': 16 });
+  new Tile('tile99', { 'up': 95 });
 var tile100 =
-  new Tile('tile100', { 'left': 20, 'right': 19 });
-var tile89 =
+  new Tile('tile100', { 'up': 96 });
 
 
 var board = new Board(tile0);
