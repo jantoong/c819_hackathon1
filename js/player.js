@@ -63,10 +63,9 @@ class Zombie extends Player {
     }
     else if (player.items['shotgun']) {
       console.log(this.name + ' has been killed!');
-      player.useItem('shotgun')
-      }
+      player.useItem('shotgun');
       this.domElement.hide();
-      return;
+    }
     else if (player.items['bat']) {
       console.log(player.name + ' uses the bat!');
       player.useItem('bat');
