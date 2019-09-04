@@ -5,14 +5,15 @@ class Player {
     this.playerID = null;
     this.items = {};
     this.location = null;
+    this.renderPlayer = this.renderPlayer.bind(this);
   }
 
   renderPlayer(startingLocation) {
+    var target = startingLocation;
     this.domElement = $('<div>').attr('id', '' + this.name).addClass('player');
     this.domElement.css('background-image', 'url(../assets/player.png)');
-    this.domElement.css({top: '50%', left: '50%'});
-    $('body').append(this.domElement);
-    this.location = this.domElement.position();
+    target.append(this.domElement);
+    this.location = this.domElement.parent;
     }
 
   movePlayerDom(newLocationObj) {
@@ -51,10 +52,10 @@ class Zombie extends Player {
   }
 
   renderZombie(startingLocation) {
+    var target = startingLocation;
     this.domElement = $('<div>').attr('id', '' + this.name).addClass('zombie');
     this.domElement.css('background-image', 'url(../assets/zombie.png)');
-    this.domElement.css({ top: '25%', left: '25%' });
-    $('body').append(this.domElement);
+    target.append(this.domElement);
     this.location = this.domElement.position();
   }
 
