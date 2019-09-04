@@ -1,0 +1,82 @@
+.board_area {
+  display: inline-block;
+  height: 100vw;
+  width: 100vw;
+  position: relative;
+}
+
+.ring {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  /* border: 1px solid black; */
+}
+
+.ring0 {
+  height: 30px;
+  width: 30px;
+}
+
+.ring1 {
+  height: 130px;
+  width: 130px;
+}
+
+.ring2 {
+  height: 230px;
+  width: 230px;
+}
+
+.ring3 {
+  height: 330px;
+  width: 330px;
+}
+
+.ring4 {
+  height: 430px;
+  width: 430px;
+}
+
+.ring5 {
+  height: 530px;
+  width: 530px;
+}
+
+.ring6 {
+  height: 630px;
+  width: 630px;
+}
+
+.ring7 {
+  height: 730px;
+  width: 730px;
+}
+
+.ring8 {
+  height: 830px;
+  width: 830px;
+}
+
+.ring9 {
+  height: 930px;
+  width: 930px;
+}
+
+.ring10 {
+  height: 1030px;
+  width: 1030px;
+}
+
+.tile {
+  display: inline-block;
+  height: 30px;
+  width: 50px;
+  border: 1px solid black;
+  background-color: gray;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
