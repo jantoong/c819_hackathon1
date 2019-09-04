@@ -21,6 +21,17 @@ class Player {
     this.location = positionObj;
   }
 
+  useItem(item) {
+    if (this.items[item] === 0) {
+      delete this.items[item];
+    } else {
+      this.items[item]--;
+    }
+    switch (item) {
+      case: 'torch'
+    }
+  }
+
   getLocation() {
     return this.location;
   }
@@ -50,17 +61,24 @@ class Zombie extends Player {
   eatPlayer(player) {
     if(!player.items) {
       console.log(player.name + ' has been eaten!');
-    } else if (player.items['shotgun']) {
-        console.log(this.name + ' has been killed!');
-        if(player.items['shotgun'] === 0) {
-          delete player.items['shotgun'];
-        } else {
-          player.items['shotgun']--;
-        }
-        this.domElement.hide();
-      } else if (player.items['bat']) {
-        console.log(player.name + ' uses the bat!');
-
+    }
+    else if (player.items['shotgun']) {
+      console.log(this.name + ' has been killed!');
+      player.useItem('shotgun')
       }
+      this.domElement.hide();
+      return;
+    else if (player.items['bat']) {
+      console.log(player.name + ' uses the bat!');
+      player.useItem('bat');
+    }
+    else if (player.items['shovel']) {
+      console.log(player.name + ' uses the shovel!');
+      player.useItem('shovel');
+    }
+    else if (player.items['bat']) {
+      console.log(player.name + ' uses the torch!');
+      player.useItem('torch');
+    }
   }
 }
