@@ -5,6 +5,7 @@ class Player {
     this.playerID = null;
     this.items = {};
     this.location = null;
+    this.locationDomElement = null;
     this.renderPlayer = this.renderPlayer.bind(this);
   }
 
@@ -13,7 +14,8 @@ class Player {
     this.domElement = $('<div>').attr('id', '' + this.name).addClass('player');
     this.domElement.css('background-image', 'url(../assets/player.png)');
     target.append(this.domElement);
-    this.location = this.domElement.parent;
+    this.locationDomElement = this.domElement.parent;
+    this.location = tileList['tile0'];
     }
 
   movePlayerDom(newLocationObj) {
@@ -30,6 +32,13 @@ class Player {
     }
 
     return item;
+  }
+
+  winCheck() {
+    var locationId = this.location.getId()
+    if (locationId === 0 && this.items['batteries']) {
+      console.log(this.name +' has won!')
+    }
   }
 
   getLocation() {

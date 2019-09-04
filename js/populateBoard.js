@@ -1,6 +1,5 @@
-var tileList = {};
- var tileNeighborLookup =
- {
+var tileNeighborLookup =
+  {
   'tile0': {'up': 4, 'left': 3, 'right': 1, 'down': 2},
   'tile1': {'up': 0, 'down': 5},
   'tile2': {'up': 0, 'down': 6},

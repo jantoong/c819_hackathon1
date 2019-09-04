@@ -1,3 +1,5 @@
+var tileList = {};
+
 class CreateBoard{
   constructor() {
     this.numberOfTilesInRings = [1, 4, 4, 16, 4, 24, 4, 32, 4, 4, 4];
@@ -94,7 +96,12 @@ class CreateBoard{
     for (var i = 0; i < this.numberOfTilesInRings[ringNumber]; i++) {
       var newTile = $('<div>').addClass('tile').attr('id', 'tile' + tileIDCounter).text(tileIDCounter);
       newTile.css('transform', 'translate(' + this.calculateXValues(ringNumber)[i] + 'px ,' + this.calculateYValues(ringNumber)[i] + 'px) rotate(' + this.calculateRotateValues(ringNumber)[i] + 'deg)');
-      var newTileObj = new Tile(tileIDCounter);
+      if (tileIDCounter === 0) {
+        var newTileObj = new Shack(tileIDCounter);
+      } else {
+        var newTileObj = new Tile(tileIDCounter);
+      }
+      newTileObj.domElement = newTile;
       tileList['tile' + tileIDCounter] = newTileObj;
       $('#ring' + ringNumber).append(newTile);
       tileIDCounter++;
