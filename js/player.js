@@ -46,7 +46,8 @@ class Player {
 
 class Zombie extends Player {
   constructor(name) {
-    super('Zombie');
+    super(name);
+    this.zombieType = null;
   }
 
   renderZombie(startingLocation) {
