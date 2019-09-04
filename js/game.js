@@ -47,6 +47,45 @@ class Game {
     this.players.push(newplayer);
   }
 
+  renderItems() {
+    tileList['tile19'].item['shovel'] = 1;
+    tileList['tile11'].item['shovel'] = 1;
+    tileList['tile19'].domElement.append($('<div>').addClass('shovel'));
+    tileList['tile11'].domElement.append($('<div>').addClass('shovel'));
+
+    tileList['tile26'].item['torch'] = 1;
+    tileList['tile28'].item['torch'] = 1;
+    tileList['tile26'].domElement.append($('<div>').addClass('torch'));
+    tileList['tile28'].domElement.append($('<div>').addClass('torch'));
+
+    tileList['tile81'].item['bat'] = 1;
+    tileList['tile73'].item['bat'] = 1;
+    tileList['tile65'].item['bat'] = 1;
+    tileList['tile57'].item['bat'] = 1;
+    tileList['tile81'].domElement.append($('<div>').addClass('bat'));
+    tileList['tile73'].domElement.append($('<div>').addClass('bat'));
+    tileList['tile65'].domElement.append($('<div>').addClass('bat'));
+    tileList['tile57'].domElement.append($('<div>').addClass('bat'));
+
+    tileList['tile98'].item['batteries'] = 1;
+    tileList['tile99'].item['batteries'] = 1;
+    tileList['tile100'].item['batteries'] = 1;
+    tileList['tile97'].item['batteries'] = 1;
+    tileList['tile98'].domElement.append($('<div>').addClass('batteries'));
+    tileList['tile99'].domElement.append($('<div>').addClass('batteries'));
+    tileList['tile100'].domElement.append($('<div>').addClass('batteries'));
+    tileList['tile97'].domElement.append($('<div>').addClass('batteries'));
+
+    tileList['tile98'].item['shotgun'] = 1;
+    tileList['tile99'].item['shotgun'] = 1;
+    tileList['tile100'].item['shotgun'] = 1;
+    tileList['tile97'].item['shotgun'] = 1;
+    tileList['tile98'].domElement.append($('<div>').addClass('shotgun'));
+    tileList['tile99'].domElement.append($('<div>').addClass('shotgun'));
+    tileList['tile100'].domElement.append($('<div>').addClass('shotgun'));
+    tileList['tile97'].domElement.append($('<div>').addClass('shotgun'));
+  }
+
   getTurn() {
     return this.currentPlayersTurn;
   }

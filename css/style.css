@@ -89,3 +89,32 @@
   background-size: cover;
   background-color: transparent;
 }
+
+.shovel, .bat, .torch, .shotgun, .batteries {
+  position: relative;
+  z-index: 10;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  background-color: transparent;
+}
+
+.shovel {
+  background-image: url(../assets/shovel.png);
+}
+
+.torch {
+  background-image: url(../assets/torch.png);
+}
+
+.batteries {
+  background-image: url(../assets/batteries.png);
+}
+
+.shotgun {
+  background-image: url(../assets/shotgun.png);
+}
+
+.bat {
+  background-image: url(../assets/bat.png);
+}

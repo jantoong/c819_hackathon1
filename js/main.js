@@ -1,6 +1,8 @@
 $(document).ready(drawBoard);
 
 var tileIDCounter = 0;
+var game = new Game();
+
 
 function drawBoard() {
   var board = new CreateBoard();
@@ -9,8 +11,8 @@ function drawBoard() {
 }
 
 function createDOM() {
-  var game = new Game();
   game.createNewPlayer();
   game.createNewPlayer();
   game.createZombies();
+  game.renderItems();
 }
