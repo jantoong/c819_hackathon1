@@ -10,4 +10,12 @@ class Tile {
   getId(){
     return this.id;
   }
+
+  checkDirections() {
+    var directionArr = [];
+    for (var direction in this.neighbors) {
+      directionArr.push(direction);
+    }
+    return directionArr;
+  }
 }
