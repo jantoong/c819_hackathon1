@@ -1,7 +1,7 @@
 .board_area {
   display: inline-block;
   height: 100vw;
-  width: 100vw;
+  width: 75vw;
   position: relative;
 }
 
@@ -79,4 +79,13 @@
   position: absolute;
   top: 50%;
   left: 50%;
+}
+
+.player, .zombie {
+  position: absolute;
+  z-index: 10;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  background-color: transparent;
 }

@@ -1,4 +1,4 @@
-
+var tileList = {};
  var tileNeighborLookup =
  {
   'tile0': {'up': 4, 'left': 3, 'right': 1, 'down': 2},
@@ -102,5 +102,3 @@
   'tile99': {'up': 95},
   'tile100': {'up': 96}
 }
-
-var tileList = {}

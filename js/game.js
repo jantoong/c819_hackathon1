@@ -42,7 +42,8 @@ class Game {
   createNewPlayer() {
     var playerNumber = this.players.length + 1;
     var newplayer = new Player('Player' + playerNumber);
-    newplayer.renderPlayer($('#tile0'));
+    var target = $('#tile0');
+    newplayer.renderPlayer(target);
     this.players.push(newplayer);
   }
 
