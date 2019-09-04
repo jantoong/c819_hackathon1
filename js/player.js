@@ -52,6 +52,23 @@ class Player {
   getDomElement() {
     return this.domElement;
   }
+
+  moveInDirection(direction) {
+    var currentTile = this.location;
+    var dArr = currentTile.checkDirections();
+
+    var destinationTileID = currentTile.neighbors[direction];
+
+    if (dArr.includes(direction)) {
+      this.domElement.detach();
+      tileList['tile' + destinationTileID].domElement.append(this.domElement);
+      console.log(currentTile);
+      this.location = tileList['tile' + destinationTileID];
+      this.locationDomElement = tileList['tile' + destinationTileID].domElement;
+    } else {
+      console.log('Cant move that way!');
+    }
+  }
 }
 
 class Zombie extends Player {
