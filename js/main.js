@@ -15,6 +15,7 @@ function createDOM() {
   game.createNewPlayer();
   game.createNewPlayer();
   game.createZombies();
+  game.renderItems();
 }
 
 function tileInfo(event) {
