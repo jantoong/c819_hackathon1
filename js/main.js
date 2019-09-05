@@ -12,8 +12,8 @@ function drawBoard() {
 }
 
 function createDOM() {
-  game.createNewPlayer();
-  game.createNewPlayer();
+  //game.createNewPlayer();
+  //game.createNewPlayer();
   game.createZombies();
   game.renderItems();
 }

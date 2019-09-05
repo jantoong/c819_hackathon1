@@ -60,6 +60,8 @@ class Game {
     var target = $('#tile0');
     newplayer.renderPlayer(target);
     this.players.push(newplayer);
+    $('.playerBoxContainer').append($('<div>').addClass('playerBox').addClass('player' + playerNumber).text('PLAYER' + playerNumber));
+
   }
 
   renderItems() {

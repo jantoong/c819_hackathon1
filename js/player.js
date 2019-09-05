@@ -11,7 +11,7 @@ class Player {
 
   renderPlayer(startingLocation) {
     var target = startingLocation;
-    this.domElement = $('<div>').attr('id', '' + this.name).addClass('player');
+    this.domElement = $('<div>').attr('id', '' + this.name).addClass('playerIcon');
     this.domElement.css('background-image', 'url(../assets/player.png)');
     target.append(this.domElement);
     this.locationDomElement = this.domElement.parent;
@@ -69,7 +69,7 @@ class Player {
       this.items[key] = 1;
       delete this.location.item[key];
       this.location.domElement.find('.item').hide();
-      $('.' + this.name).append($('<div>').addClass(key));
+      $('.' + this.name).append($('<div>').addClass(key + 'player'));
     }
   }
 }
@@ -82,7 +82,7 @@ class Zombie extends Player {
 
   renderZombie(startingLocation) {
     var target = startingLocation;
-    this.domElement = $('<div>').attr('id', '' + this.name).addClass('zombie');
+    this.domElement = $('<div>').attr('id', '' + this.name).addClass('zombieIcon');
     this.domElement.css('background-image', 'url(../assets/zombie.png)');
     target.append(this.domElement);
     this.location = this.domElement.position();

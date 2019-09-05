@@ -1,7 +1,9 @@
 .board_area {
   display: inline-block;
-  height: 100vw;
-  width: 75vw;
+  top: 0;
+  left: 0;
+  height: 40vw;
+  width: 60vw;
   position: relative;
 }
 
@@ -82,7 +84,7 @@
   text-align: center;
 }
 
-.player, .zombie {
+.playerIcon, .zombieIcon {
   position: absolute;
   z-index: 10;
   height: 40px;
@@ -150,18 +152,77 @@
   background-image: url(../assets/bat.png);
 }
 
-.player1{
-  display: inline-block;
-  height: 70px;
-  width: 170px;
-  border: 1px solid black;
-  background-color: white;
-  position: absolute;
-  top: 20%;
-  right: 2%;
-  text-align: center;
+#playerItem {
+  position: relative;
+  display: flex;
+  top: revert;
+  left: revert;
 }
 
+.playerBoxContainer {
+  height: 75%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid black;
+  background-color: white;
+  text-align: center;
+  overflow: auto;
+}
+
+.playerBox {
+  width: 99%;
+  height: 10%;
+  border: 1px solid black;
+  background-color: white;
+  text-align: left;
+  font-size: 200%;
+}
+
+.menuBoxContainer {
+  position: absolute;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  display: flex;
+  right: 2%;
+  top: 0%;
+  height: 100%;
+  width: 500px;
+}
+
+.rollbox{
+  display: flex;
+  width: 50%;
+  background-color: white;
+  border: 1px black solid;
+  justify-content: center;
+  align-items: center;
+  font-size: 500%;
+}
+
+.menuContainerBottom {
+  display: flex;
+  flex-direction: row;
+  height: 25%;
+  width: 100%;
+}
+
+.turnBox {
+  height: 100%;
+  width: 50%;
+  font-size: 500%;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.turn {
+  color: red;
+  border-color: red;
+}
+
+
+/*
 .player2{
   display: inline-block;
   height: 70px;
@@ -194,22 +255,4 @@
   top: 50%;
   right: 2%;
   text-align: center;
-}
-
-.rollbox{
-  display: inline-block;
-  height: 100px;
-  width: 200px;
-  border: 1px solid black;
-  background-color: white;
-  position: absolute;
-  top: 90%;
-  right: 2%;
-  text-align: center;
-  font-size: 500%;
-}
-
-.turn {
-  color: red;
-  border-color: red;
-}
+} */
