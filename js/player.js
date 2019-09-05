@@ -22,7 +22,9 @@ class Player {
   winCheck() {
     var locationId = this.location.getId()
     if (locationId === 0 && this.items['batteries']) {
-      console.log(this.name +' has won!')
+      $('#win_message').text(this.name + ' has won!');
+      game.displayWinModal();
+      console.log(this.name + ' has won!')
     }
   }
 
