@@ -5,11 +5,15 @@ class Game {
     this.players = [];
     this.currentPlayersTurn = 0;
     this.turnCounter = 0;
-    this.movementCounter = 0;
+    this.movementCounter = null;
     this.diceRoll = this.diceRoll.bind(this);
   }
 
   diceRoll(diceType) {
+    if (this.movementCounter !== null) {
+      this.nextPlayersTurn();
+    }
+
     if (diceType !== 3) {
       var result = Math.floor(Math.random() * 6) + 1;
       $('.rollbox').text('roll ' + result)
@@ -102,19 +106,18 @@ class Game {
 
   nextPlayersTurn() {
     this.currentPlayersTurn = ++this.turnCounter % this.players.length;
+    if (this.currentPlayersTurn === 0) {
+      $('.player' + this.players.length).removeClass('turn');
+    } else {
+      $('.player' + this.currentPlayersTurn).removeClass('turn');
+    }
+    $('.player' + (this.currentPlayersTurn + 1)).addClass('turn');
   }
 
   moveSpacesDom(playerObj, newLocationObj) {
     var positionObj = newLocationObj.position();
     playerObj.domElement.css({ top: positionObj['top'], left: positionObj['left'] });
     playerObj.location = positionObj;
-  }
-
-  checkTurnOver() {
-    if (this.movementCounter === 0) {
-      this.nextPlayersTurn();
-      console.log('Active player:', this.getTurn());
-    }
   }
 
 }
