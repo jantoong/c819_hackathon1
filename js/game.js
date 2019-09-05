@@ -6,19 +6,19 @@ class Game {
     this.currentPlayersTurn = 0;
     this.turnCounter = 0;
     this.movementCounter = null;
+    this.diceRoll = this.diceRoll.bind(this);
   }
 
   diceRoll(diceType) {
-    var result = null;
     if (diceType !== 3) {
-      result = Math.floor(Math.random() * 6) + 1;
+      var result = Math.floor(Math.random() * 6) + 1;
       $('.rollbox').text('roll ' + result)
       console.log('you rolled a ' + result);
       this.movementCounter = result;
       return result;
     }
-    result = Math.floor(Math.random() * diceType) + 1;
-    $('.rollbox').text(result);
+    var result = Math.floor(Math.random() * diceType) + 1;
+    $('.rollbox').text('roll ' + result);
     console.log('you rolled a ' + result);
     this.movementCounter = result;
     return result;

@@ -19,7 +19,10 @@ function createDOM() {
 }
 
 function tileInfo(event) {
-  var target = $(event.currentTarget).attr('id');
-  game.players[game.getTurn()].moveInDirection(target);
-  return game.players[game.getTurn()].location;
+  if(game.movementCounter > 0){
+    var target = $(event.currentTarget).attr('id');
+    game.players[game.getTurn()].moveInDirection(target);
+    game.movementCounter--;
+    return game.players[game.getTurn()].location;
+  }
 }
