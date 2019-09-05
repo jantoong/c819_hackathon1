@@ -60,6 +60,9 @@ class Player {
   }
 
   checkItem() {
+    if(this.constructor === Zombie) {
+      return;
+    }
     for(var key in this.location.item) {
       this.items[key] = 1;
       delete this.location.item[key];
