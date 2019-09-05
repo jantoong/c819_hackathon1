@@ -9,6 +9,7 @@ function drawBoard() {
   createDOM();
   $('.rollbox').on('click', game.diceRoll);
   $('.tile').on('click', tileInfo);
+  $('#play_again_button').click(game.resetGame).click(game.hideWinModal);
 }
 
 function createDOM() {
