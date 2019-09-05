@@ -9,24 +9,26 @@ class Game {
     this.turnCounter = 0;
     this.movementCounter = null;
     this.diceRoll = this.diceRoll.bind(this);
+    this.playerTurn = true;
+    this.zombieTurns = [];
+    this.zombieMovementCounter = null;
   }
 
-  diceRoll(diceType) {
-    if (this.movementCounter !== null) {
+  diceRoll() {
+    this.nextZombieTurn();
+    if (this.movementCounter !== null && this.playerTurn === false) {
       this.nextPlayersTurn();
     }
-
-    if (diceType !== 3) {
-      var result = Math.floor(Math.random() * 6) + 1;
-      $('.rollbox').text('roll ' + result)
-      console.log('you rolled a ' + result);
-      this.movementCounter = result;
-      return result;
-    }
-    var result = Math.floor(Math.random() * diceType) + 1;
+    var result = Math.floor(Math.random() * 6) + 1;
     $('.rollbox').text('roll ' + result);
     console.log('you rolled a ' + result);
     this.movementCounter = result;
+    if (this.playerTurn === false) {
+      this.zombieMovementCounter = result * 2;
+      for (var index of this.zombieTurns) {
+        index.moves = result;
+      }
+    }
     return result;
   }
 
@@ -131,6 +133,20 @@ class Game {
       $('.player' + this.currentPlayersTurn).removeClass('turn');
     }
     $('.player' + (this.currentPlayersTurn + 1)).addClass('turn');
+  }
+
+  nextZombieTurn() {
+    this.zombieTurns = [];
+    $('.zombieIcon').css('background-color', 'transparent');
+    var random = Math.floor(Math.random() * this.zombies.length);
+    var random2 = Math.floor(Math.random() * this.zombies.length);
+    while(random === random2) {
+      random2 = Math.floor(Math.random() * this.zombies.length);
+    }
+    this.zombieTurns.push(this.zombies[random], this.zombies[random2]);
+    this.zombieTurns[0].domElement.css('background-color', 'green');
+    this.zombieTurns[1].domElement.css('background-color', 'red');
+    console.log(this.zombieTurns);
   }
 
   moveSpacesDom(playerObj, newLocationObj) {

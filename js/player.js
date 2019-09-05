@@ -114,6 +114,7 @@ class Zombie extends Player {
   constructor(name) {
     super(name);
     this.zombieType = null;
+    this.moves = null;
   }
 
   renderZombie(startingLocation) {
