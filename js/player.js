@@ -18,12 +18,6 @@ class Player {
     this.location = tileList['tile0'];
     }
 
-  // movePlayerDom(newLocationObj) {
-  //   var positionObj = newLocationObj.position();
-  //   this.domElement.css({ top: positionObj['top'], left: positionObj['left'] });
-  //   this.location = positionObj;
-  // }
-
   useItem(item) {
     if (this.items[item] === 0) {
       delete this.items[item];
@@ -63,11 +57,19 @@ class Player {
       tileList['tile' + id].domElement.append(this.domElement);
       this.location = tileList['tile' + id];
       this.locationDomElement = tileList['tile' + id].domElement;
+      this.checkItem();
       this.winCheck();
-
-      console.log('Moved to tile:', this.location);
     } else {
       console.log('Cant move that way!');
+    }
+  }
+
+  checkItem() {
+    for(var key in this.location.item) {
+      this.items[key] = 1;
+      delete this.location.item[key];
+      this.location.domElement.find('.item').hide();
+      $('.' + this.name).append($('<div>').addClass(key));
     }
   }
 }

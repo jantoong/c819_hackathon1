@@ -5,7 +5,7 @@ class Game {
     this.players = [];
     this.currentPlayersTurn = 0;
     this.turnCounter = 0;
-    this.movementCounter = null;
+    this.movementCounter = 100000;
     this.diceRoll = this.diceRoll.bind(this);
   }
 
@@ -52,7 +52,7 @@ class Game {
 
   createNewPlayer() {
     var playerNumber = this.players.length + 1;
-    var newplayer = new Player('Player' + playerNumber);
+    var newplayer = new Player('player' + playerNumber);
     var target = $('#tile0');
     newplayer.renderPlayer(target);
     this.players.push(newplayer);
@@ -61,40 +61,39 @@ class Game {
   renderItems() {
     tileList['tile19'].item['shovel'] = 1;
     tileList['tile11'].item['shovel'] = 1;
-    tileList['tile19'].domElement.append($('<div>').addClass('shovel'));
-    tileList['tile11'].domElement.append($('<div>').addClass('shovel'));
+    tileList['tile19'].domElement.append($('<div>').addClass('shovel').addClass('item'));
+    tileList['tile11'].domElement.append($('<div>').addClass('shovel').addClass('item'));
 
     tileList['tile26'].item['torch'] = 1;
     tileList['tile28'].item['torch'] = 1;
-    tileList['tile26'].domElement.append($('<div>').addClass('torch'));
-    tileList['tile28'].domElement.append($('<div>').addClass('torch'));
+    tileList['tile26'].domElement.append($('<div>').addClass('torch').addClass('item'));
+    tileList['tile28'].domElement.append($('<div>').addClass('torch').addClass('item'));
 
     tileList['tile81'].item['bat'] = 1;
     tileList['tile73'].item['bat'] = 1;
     tileList['tile65'].item['bat'] = 1;
     tileList['tile57'].item['bat'] = 1;
-    tileList['tile81'].domElement.append($('<div>').addClass('bat'));
-    tileList['tile73'].domElement.append($('<div>').addClass('bat'));
-    tileList['tile65'].domElement.append($('<div>').addClass('bat'));
-    tileList['tile57'].domElement.append($('<div>').addClass('bat'));
+    tileList['tile81'].domElement.append($('<div>').addClass('bat').addClass('item'));
+    tileList['tile73'].domElement.append($('<div>').addClass('bat').addClass('item'));
+    tileList['tile65'].domElement.append($('<div>').addClass('bat').addClass('item'));
+    tileList['tile57'].domElement.append($('<div>').addClass('bat').addClass('item'));
 
     tileList['tile98'].item['batteries'] = 1;
     tileList['tile99'].item['batteries'] = 1;
     tileList['tile100'].item['batteries'] = 1;
     tileList['tile97'].item['batteries'] = 1;
-    tileList['tile98'].domElement.append($('<div>').addClass('batteries'));
-    tileList['tile99'].domElement.append($('<div>').addClass('batteries'));
-    tileList['tile100'].domElement.append($('<div>').addClass('batteries'));
-    tileList['tile97'].domElement.append($('<div>').addClass('batteries'));
+    tileList['tile99'].domElement.append($('<div>').addClass('batteries').addClass('item'));
+    tileList['tile100'].domElement.append($('<div>').addClass('batteries').addClass('item'));
+    tileList['tile97'].domElement.append($('<div>').addClass('batteries').addClass('item'));
 
     tileList['tile98'].item['shotgun'] = 1;
     tileList['tile99'].item['shotgun'] = 1;
     tileList['tile100'].item['shotgun'] = 1;
     tileList['tile97'].item['shotgun'] = 1;
-    tileList['tile98'].domElement.append($('<div>').addClass('shotgun'));
-    tileList['tile99'].domElement.append($('<div>').addClass('shotgun'));
-    tileList['tile100'].domElement.append($('<div>').addClass('shotgun'));
-    tileList['tile97'].domElement.append($('<div>').addClass('shotgun'));
+    tileList['tile98'].domElement.append($('<div>').addClass('shotgun').addClass('item'));
+    tileList['tile99'].domElement.append($('<div>').addClass('shotgun').addClass('item'));
+    tileList['tile100'].domElement.append($('<div>').addClass('shotgun').addClass('item'));
+    tileList['tile97'].domElement.append($('<div>').addClass('shotgun').addClass('item'));
   }
 
   getTurn() {
