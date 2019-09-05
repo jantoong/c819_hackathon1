@@ -53,18 +53,20 @@ class Player {
     return this.domElement;
   }
 
-  moveInDirection(direction) {
+  moveInDirection(tileID) {
     var currentTile = this.location;
-    var dArr = currentTile.checkDirections();
+    var legalMovesArr = currentTile.checkDirections();
+    var id = parseInt(tileID.slice(4));
+    // var destinationTileID = currentTile.neighbors[direction];
 
-    var destinationTileID = currentTile.neighbors[direction];
-
-    if (dArr.includes(direction)) {
+    if (legalMovesArr.includes(id)) {
       this.domElement.detach();
-      tileList['tile' + destinationTileID].domElement.append(this.domElement);
-      console.log(currentTile);
-      this.location = tileList['tile' + destinationTileID];
-      this.locationDomElement = tileList['tile' + destinationTileID].domElement;
+      tileList['tile' + id].domElement.append(this.domElement);
+      this.location = tileList['tile' + id];
+      this.locationDomElement = tileList['tile' + id].domElement;
+      this.winCheck();
+
+      console.log('Moved to tile:', this.location);
     } else {
       console.log('Cant move that way!');
     }
