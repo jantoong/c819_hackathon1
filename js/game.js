@@ -138,4 +138,23 @@ class Game {
     playerObj.location = positionObj;
   }
 
+  displayWinModal() {
+    $('#win_modal').removeClass('hidden');
+  }
+
+  hideWinModal() {
+    $('#win_modal').addClass('hidden');
+  }
+
+  resetGame() {
+    $('.tile').remove();
+    game = new Game();
+    $('.playerBoxContainer').empty();
+    $('.rollbox').off('click');
+    $('.tile').off('click');
+    $('#play_again_button').off('click');
+    tileIDCounter = 0;
+    drawBoard();
+  }
+
 }
