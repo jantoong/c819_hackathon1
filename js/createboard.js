@@ -94,7 +94,7 @@ class CreateBoard{
 
   makeTileRing(ringNumber) {
     for (var i = 0; i < this.numberOfTilesInRings[ringNumber]; i++) {
-      var newTile = $('<div>').addClass('tile').attr('id', 'tile' + tileIDCounter).text(tileIDCounter);
+      var newTile = $('<div>').addClass('tile').attr('id', 'tile' + tileIDCounter);//.text(tileIDCounter);
       newTile.css('transform', 'translate(' + this.calculateXValues(ringNumber)[i] + 'px ,' + this.calculateYValues(ringNumber)[i] + 'px) rotate(' + this.calculateRotateValues(ringNumber)[i] + 'deg)');
       var newTileObj = new Tile(tileIDCounter);
       newTileObj.domElement = newTile;

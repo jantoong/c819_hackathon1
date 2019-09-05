@@ -1,10 +1,13 @@
+body{
+  background-color: rgb(0, 48, 0);
+}
 .board_area {
   display: inline-block;
-  top: 0;
-  left: 0;
-  height: 40vw;
-  width: 60vw;
-  position: relative;
+  top: -3%;
+  left: -28%;
+  height: 51vw;
+  width: 120%;
+  position: absolute;
 }
 
 .ring {
@@ -162,7 +165,7 @@
 }
 
 .playerBoxContainer {
-  height: 75%;
+  height: 72.5%;
   width: 100%;
   padding: 0;
   margin: 0;
@@ -184,19 +187,7 @@
   font-size: 200%;
 }
 
-.menuBoxContainer {
-  position: absolute;
-  flex-direction: row;
-  flex-wrap: wrap;
-  border: 1px solid black;
-  display: flex;
-  right: 2%;
-  top: 0%;
-  height: 100%;
-  width: 500px;
-}
-
-.rollbox{
+.rollbox, .turnBox{
   display: flex;
   width: 50%;
   background-color: white;
@@ -205,7 +196,16 @@
   align-items: center;
   font-size: 500%;
 }
-
+img{
+  width: 100%;
+}
+.turnBox{
+  background-color: rgb(7, 18, 6);
+  display: flex;
+  background-size: contain;
+  align-content: center;
+  background-repeat: no-repeat;
+}
 .menuContainerBottom {
   display: flex;
   flex-direction: row;
@@ -213,13 +213,6 @@
   width: 100%;
 }
 
-.turnBox {
-  height: 100%;
-  width: 50%;
-  font-size: 500%;
-  text-align: center;
-  border: 1px solid black;
-}
 
 .turn {
   color: red;
@@ -279,6 +272,19 @@
 }
 
 .newPlayer {
+  background-color: white;
   width: 100%;
   text-align: center;
+}
+
+.menuBoxContainer {
+  position: absolute;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 3px solid white;
+  display: flex;
+  right: 2%;
+  top: 4%;
+  height: 90%;
+  width: 500px;
 }
