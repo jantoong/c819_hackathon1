@@ -9,7 +9,17 @@ class Game {
 
   diceRoll(diceType) {
     var result = null;
+    if (diceType !== 3) {
+      result = Math.floor(Math.random() * 6) + 1;
+      $('.rollbox').text('roll ' + result)
+      console.log('you rolled a ' + result);
+      this.movementCounter = result;
+      return result;
+    }
     result = Math.floor(Math.random() * diceType) + 1;
+    $('.rollbox').text(result);
+    console.log('you rolled a ' + result);
+    this.movementCounter = result;
     return result;
   }
 
