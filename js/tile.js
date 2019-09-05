@@ -3,7 +3,7 @@ class Tile {
     this.id = id;
     this.neighbors = tileNeighborLookup['tile' + this.id];
     this.domElement = null;
-    this.item = [];
+    this.item = {};
     this.entities = {};
   }
 
