@@ -5,7 +5,7 @@ class Game {
     this.players = [];
     this.currentPlayersTurn = 0;
     this.turnCounter = 0;
-    this.movementCounter = 100000;
+    this.movementCounter = 0;
     this.diceRoll = this.diceRoll.bind(this);
   }
 
