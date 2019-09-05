@@ -5,11 +5,22 @@ class Game {
     this.players = [];
     this.currentPlayersTurn = null;
     this.turnCounter = 0;
+    this.movementCounter = null;
   }
 
   diceRoll(diceType) {
     var result = null;
+    if (diceType !== 3){
+    result = Math.floor(Math.random() * 6) + 1;
+    $('.rollbox').text('roll '+result)
+    console.log('you rolled a '+result);
+    this.movementCounter = result;
+    return result;
+    }
     result = Math.floor(Math.random() * diceType) + 1;
+    $('.rollbox').text(result);
+    console.log('you rolled a '+result);
+    this.movementCounter = result;
     return result;
   }
 
@@ -42,8 +53,7 @@ class Game {
   createNewPlayer() {
     var playerNumber = this.players.length + 1;
     var newplayer = new Player('Player' + playerNumber);
-    var target = $('#tile0');
-    newplayer.renderPlayer(target);
+    newplayer.renderPlayer($('#tile0'));
     this.players.push(newplayer);
   }
 
