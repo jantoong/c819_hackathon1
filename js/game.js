@@ -102,13 +102,20 @@ class Game {
   }
 
   nextPlayersTurn() {
-    this.currentPlayersTurn = this.players[++this.turnCounter % this.players.length];
+    this.currentPlayersTurn = ++this.turnCounter % this.players.length;
   }
 
   moveSpacesDom(playerObj, newLocationObj) {
     var positionObj = newLocationObj.position();
     playerObj.domElement.css({ top: positionObj['top'], left: positionObj['left'] });
     playerObj.location = positionObj;
+  }
+
+  checkTurnOver() {
+    if (this.movementCounter === 0) {
+      this.nextPlayersTurn();
+      console.log('Active player:', this.getTurn());
+    }
   }
 
 }
