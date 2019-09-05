@@ -11,10 +11,10 @@ function drawBoard() {
   $('.rollbox').on('click', game.diceRoll);
   $('.tile').on('click', tileInfo);
   $('#play_again_button').click(game.resetGame).click(game.hideWinModal);
+  $('.newPlayer').on('click', game.createNewPlayer);
 }
 
 function createDOM() {
-  game.createNewPlayer();
   game.createZombies();
   game.renderItems();
 }

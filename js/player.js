@@ -54,6 +54,9 @@ class Player {
       this.location.addEntity(this);
       this.checkItem();
       this.winCheck();
+      if(this.constructor === Zombie){
+        this.eatPlayer();
+      }
     } else {
       console.log('Cant move that way!');
     }
@@ -74,8 +77,10 @@ class Player {
   useItem(zombie) {
     if (this.items[itemUsed] === 0) {
       delete this.items[itemUsed];
+      $('.' + this.name).find('#' + itemUsed).remove();
     } else {
       this.items[itemUsed]--;
+      $('.' + this.name).find('#' + itemUsed).remove();
       switch(itemUsed) {
         case 'torch':
           console.log(this.name + ' has used a torch!');

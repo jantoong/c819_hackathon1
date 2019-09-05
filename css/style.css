@@ -277,3 +277,8 @@
 .hidden {
   display: none;
 }
+
+.newPlayer {
+  width: 100%;
+  text-align: center;
+}

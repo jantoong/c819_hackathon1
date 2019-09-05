@@ -9,6 +9,7 @@ class Game {
     this.turnCounter = 0;
     this.movementCounter = null;
     this.diceRoll = this.diceRoll.bind(this);
+    this.createNewPlayer = this.createNewPlayer.bind(this);
     this.playerTurn = true;
     this.zombieTurns = [];
     this.zombieMovementCounter = null;
