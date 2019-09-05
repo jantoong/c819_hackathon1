@@ -23,6 +23,7 @@ function tileInfo(event) {
     var target = $(event.currentTarget).attr('id');
     game.players[game.getTurn()].moveInDirection(target);
     game.movementCounter--;
+    game.checkTurnOver();
     return game.players[game.getTurn()].location;
   }
 }
