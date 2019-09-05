@@ -54,9 +54,11 @@ class Player {
 
     if (legalMovesArr.includes(id)) {
       this.domElement.detach();
+      this.location.removeEntity(this);
       tileList['tile' + id].domElement.append(this.domElement);
       this.location = tileList['tile' + id];
       this.locationDomElement = tileList['tile' + id].domElement;
+      this.location.addEntity(this);
       this.checkItem();
       this.winCheck();
     } else {
@@ -69,7 +71,7 @@ class Player {
       this.items[key] = 1;
       delete this.location.item[key];
       this.location.domElement.find('.item').hide();
-      $('.' + this.name).append($('<div>').addClass(key + 'player'));
+      $('.' + this.name).append($('<div>').addClass(key));
     }
   }
 }
@@ -85,29 +87,19 @@ class Zombie extends Player {
     this.domElement = $('<div>').attr('id', '' + this.name).addClass('zombieIcon');
     this.domElement.css('background-image', 'url(../assets/zombie.png)');
     target.append(this.domElement);
-    this.location = this.domElement.position();
+    this.locationDomElement = this.domElement.position();
   }
 
-  eatPlayer(player) {
-    if(!player.items) {
-      console.log(player.name + ' has been eaten!');
+  checkPlayer() {
+    if(this.locationDomElement.find('.playerIcon')) {
+      console.log('true');
+      var currentPlayer
+    } else {
+      console.log('false');
     }
-    else if (player.items['shotgun']) {
-      console.log(this.name + ' has been killed!');
-      player.useItem('shotgun');
-      this.domElement.hide();
-    }
-    else if (player.items['bat']) {
-      console.log(player.name + ' uses the bat!');
-      player.useItem('bat');
-    }
-    else if (player.items['shovel']) {
-      console.log(player.name + ' uses the shovel!');
-      player.useItem('shovel');
-    }
-    else if (player.items['bat']) {
-      console.log(player.name + ' uses the torch!');
-      player.useItem('torch');
-    }
+  }
+
+  eatPlayer() {
+
   }
 }

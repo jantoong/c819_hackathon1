@@ -3,6 +3,7 @@ class Game {
     this.diceTypes = [6,3];
     this.possibleZombieTypes = ['light', 'medium', 'dark'];
     this.players = [];
+    this.zombies = [];
     this.currentPlayersTurn = 0;
     this.turnCounter = 0;
     this.movementCounter = null;
@@ -31,33 +32,48 @@ class Game {
   createZombies() {
     var zombie1 = new Zombie('zombie1');
     zombie1.zombieType = this.possibleZombieTypes[0];
+    zombie1.location = tileList['tile35'];
+    tileList['tile35'].entities.push(zombie1);
     zombie1.renderZombie($('#tile35'));
 
     var zombie2 = new Zombie('zombie2');
     zombie2.zombieType = this.possibleZombieTypes[0];
+    zombie2.location = tileList['tile47'];
+    tileList['tile47'].entities.push(zombie2);
     zombie2.renderZombie($('#tile47'));
 
     var zombie3 = new Zombie('zombie3');
     zombie3.zombieType = this.possibleZombieTypes[1];
+    zombie3.location = tileList['tile61'];
+    tileList['tile61'].entities.push(zombie3);
     zombie3.renderZombie($('#tile61'));
 
     var zombie4 = new Zombie('zombie4');
     zombie4.zombieType = this.possibleZombieTypes[1];
+    zombie4.location = tileList['tile69'];
+    tileList['tile69'].entities.push(zombie4);
     zombie4.renderZombie($('#tile69'));
 
     var zombie5 = new Zombie('zombie5');
     zombie5.zombieType = this.possibleZombieTypes[2];
+    zombie5.location = tileList['tile77'];
+    tileList['tile77'].entities.push(zombie5);
     zombie5.renderZombie($('#tile77'));
 
     var zombie6 = new Zombie('zombie6');
     zombie6.zombieType = this.possibleZombieTypes[2];
+    zombie6.location = tileList['tile85'];
+    tileList['tile85'].entities.push(zombie6);
     zombie6.renderZombie($('#tile85'));
+
+    this.zombies.push(zombie1, zombie2, zombie3, zombie4, zombie5, zombie6);
   }
 
   createNewPlayer() {
     var playerNumber = this.players.length + 1;
     var newplayer = new Player('player' + playerNumber);
     var target = $('#tile0');
+    tileList['tile0'].entities.push(newplayer);
     newplayer.renderPlayer(target);
     this.players.push(newplayer);
     $('.playerBoxContainer').append($('<div>').addClass('playerBox').addClass('player' + playerNumber).text('PLAYER' + playerNumber));
