@@ -7,6 +7,7 @@ class Player {
     this.location = null;
     this.locationDomElement = null;
     this.renderPlayer = this.renderPlayer.bind(this);
+    this.useItem = this.useItem.bind(this);
   }
 
   renderPlayer(startingLocation) {
@@ -17,16 +18,6 @@ class Player {
     this.locationDomElement = this.domElement.parent;
     this.location = tileList['tile0'];
     }
-
-  useItem(item) {
-    if (this.items[item] === 0) {
-      delete this.items[item];
-    } else {
-      this.items[item]--;
-    }
-
-    return item;
-  }
 
   winCheck() {
     var locationId = this.location.getId()
@@ -72,10 +63,51 @@ class Player {
     for(var key in this.location.item) {
       this.items[key] = 1;
       delete this.location.item[key];
-      this.location.domElement.find('.item').hide();
-      $('.' + this.name).append($('<div>').addClass(key));
+      this.location.domElement.find('#' + key).hide();
+      $('.' + this.name).append($('<div>').attr('id', key).addClass('playerItem'));
     }
   }
+
+  useItem(zombie) {
+    if (this.items[itemUsed] === 0) {
+      delete this.items[itemUsed];
+    } else {
+      this.items[itemUsed]--;
+      switch(itemUsed) {
+        case 'torch':
+          console.log(this.name + ' has used a torch!');
+          for(var index = 0; index < 2; index++) {
+            var directions = this.location.checkDirections();
+            var randomDirection = directions[Math.floor((Math.random()*directions.length))];
+            this.moveInDirection('tile' +randomDirection);
+          }
+          break;
+        case 'bat':
+          console.log(this.name + ' has used a bat!');
+          for (var index = 0; index < 4; index++) {
+            var directions = this.location.checkDirections();
+            var randomDirection = directions[Math.floor((Math.random() * directions.length))];
+            console.log(randomDirection);
+            this.moveInDirection('tile'+randomDirection);
+          }
+          break;
+        case 'shovel':
+          console.log(this.name + ' has used a shovel!');
+          for (var index = 0; index < 3; index++) {
+            var directions = this.location.checkDirections();
+            var randomDirection = directions[Math.floor((Math.random() * directions.length))];
+            this.moveInDirection('tile' +randomDirection);
+          }
+          break;
+        case 'shotgun':
+          console.log(this.name + ' has killed a zombie!');
+          this.location.domElement.find('.zombieIcon').remove();
+          this.location.removeEntity(zombie);
+          break;
+      }
+    }
+  }
+
 }
 
 class Zombie extends Player {
@@ -93,15 +125,27 @@ class Zombie extends Player {
   }
 
   checkPlayer() {
-    if(this.locationDomElement.find('.playerIcon')) {
-      console.log('true');
-      var currentPlayer
-    } else {
-      console.log('false');
+    var returnArr = [];
+    for (var entity of this.location.entities) {
+      if (entity.constructor === Player) {
+        returnArr.push(entity);
+      }
     }
+    return returnArr;
   }
 
   eatPlayer() {
-
+    var playerArr = this.checkPlayer();
+    if(playerArr.length > 0) {
+      for(var player of playerArr) {
+        if(Object.keys(player.items).length !== 0) {
+          game.userItemInput(player);
+          setTimeout(function () { player.useItem(this) }, 2000);
+        } else {
+          game.killPlayer(player);
+        }
+      }
+    }
   }
+
 }

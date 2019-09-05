@@ -96,7 +96,7 @@
   transform: translate(-50%, -50%)
 }
 
-.shovel, .bat, .torch {
+#shovel.board, #bat.board, #torch.board {
   position: absolute;
   z-index: 10;
   height: 40px;
@@ -108,7 +108,7 @@
   transform: translate(-50%, -50%)
 }
 
- .shotgun, .batteries{
+ #shotgun.board, #batteries.board{
   position: absolute;
   z-index: 10;
   height: 40px;
@@ -120,7 +120,7 @@
   transform: translate(0%, 0%)
  }
 
-  .batteries{
+  #batteries.board{
   position: absolute;
   z-index: 10;
   height: 40px;
@@ -132,31 +132,33 @@
   transform: translate(-75%, -100%)
  }
 
-.shovel {
+
+#shovel {
   background-image: url(../assets/shovel.png);
 }
 
-.torch {
+#torch {
   background-image: url(../assets/torch.png);
 }
 
-.batteries {
+#batteries {
   background-image: url(../assets/batteries.png);
 }
 
-.shotgun {
+#shotgun {
   background-image: url(../assets/shotgun.png);
 }
 
-.bat {
+#bat {
   background-image: url(../assets/bat.png);
 }
 
-#playerItem {
+.playerItem {
   position: relative;
   display: flex;
-  top: revert;
-  left: revert;
+  height: 70px;
+  width: 70px;
+  background-size: cover;
 }
 
 .playerBoxContainer {
@@ -171,11 +173,14 @@
 }
 
 .playerBox {
+  display: flex;
   width: 99%;
   height: 10%;
   border: 1px solid black;
   background-color: white;
   text-align: left;
+  flex-direction: row;
+  flex-wrap: wrap;
   font-size: 200%;
 }
 
@@ -221,41 +226,24 @@
   border-color: red;
 }
 
+.itemUseModal {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  height: 400px;
+  width: 500px;
+  background-color: white;
+  border: 1px black solid;
+  top: 25%;
+  left: 25%;
+}
 
-/*
-.player2{
-  display: inline-block;
-  height: 70px;
-  width: 170px;
-  border: 1px solid black;
-  background-color: white;
-  position: absolute;
-  top: 30%;
-  right: 2%;
-  text-align: center;
+.itemModal {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  background-size: cover;
 }
-.player3{
-  display: inline-block;
-  height: 70px;
-  width: 170px;
-  border: 1px solid black;
-  background-color: white;
-  position: absolute;
-  top: 40%;
-  right: 2%;
-  text-align: center;
-}
-.player4{
-  display: inline-block;
-  height: 70px;
-  width: 170px;
-  border: 1px solid black;
-  background-color: white;
-  position: absolute;
-  top: 50%;
-  right: 2%;
-  text-align: center;
-} */
 
 .modal {
   position: fixed;
