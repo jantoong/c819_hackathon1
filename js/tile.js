@@ -14,7 +14,7 @@ class Tile {
   checkDirections() {
     var directionArr = [];
     for (var direction in this.neighbors) {
-      directionArr.push(direction);
+      directionArr.push(this.neighbors[direction]);
     }
     return directionArr;
   }
