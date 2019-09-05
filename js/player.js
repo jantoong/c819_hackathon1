@@ -18,11 +18,11 @@ class Player {
     this.location = tileList['tile0'];
     }
 
-  movePlayerDom(newLocationObj) {
-    var positionObj = newLocationObj.position();
-    this.domElement.css({ top: positionObj['top'], left: positionObj['left'] });
-    this.location = positionObj;
-  }
+  // movePlayerDom(newLocationObj) {
+  //   var positionObj = newLocationObj.position();
+  //   this.domElement.css({ top: positionObj['top'], left: positionObj['left'] });
+  //   this.location = positionObj;
+  // }
 
   useItem(item) {
     if (this.items[item] === 0) {
@@ -57,7 +57,6 @@ class Player {
     var currentTile = this.location;
     var legalMovesArr = currentTile.checkDirections();
     var id = parseInt(tileID.slice(4));
-    // var destinationTileID = currentTile.neighbors[direction];
 
     if (legalMovesArr.includes(id)) {
       this.domElement.detach();

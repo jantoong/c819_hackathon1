@@ -20,6 +20,6 @@ function createDOM() {
 
 function tileInfo(event) {
   var target = $(event.currentTarget).attr('id');
-  console.log('this is ' + target);
-  return target;
+  game.players[game.getTurn()].moveInDirection(target);
+  return game.players[game.getTurn()].location;
 }

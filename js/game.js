@@ -3,8 +3,9 @@ class Game {
     this.diceTypes = [6,3];
     this.possibleZombieTypes = ['light', 'medium', 'dark'];
     this.players = [];
-    this.currentPlayersTurn = null;
+    this.currentPlayersTurn = 0;
     this.turnCounter = 0;
+    this.movementCounter = null;
   }
 
   diceRoll(diceType) {
