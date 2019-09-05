@@ -118,3 +118,62 @@
 .bat {
   background-image: url(../assets/bat.png);
 }
+
+.player1{
+  display: inline-block;
+  height: 70px;
+  width: 170px;
+  border: 1px solid black;
+  background-color: white;
+  position: absolute;
+  top: 20%;
+  right: 2%;
+  text-align: center;
+}
+
+.player2{
+  display: inline-block;
+  height: 70px;
+  width: 170px;
+  border: 1px solid black;
+  background-color: white;
+  position: absolute;
+  top: 30%;
+  right: 2%;
+  text-align: center;
+}
+.player3{
+  display: inline-block;
+  height: 70px;
+  width: 170px;
+  border: 1px solid black;
+  background-color: white;
+  position: absolute;
+  top: 40%;
+  right: 2%;
+  text-align: center;
+}
+.player4{
+  display: inline-block;
+  height: 70px;
+  width: 170px;
+  border: 1px solid black;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  text-align: center;
+}
+
+.rollbox{
+  display: inline-block;
+  height: 100px;
+  width: 200px;
+  border: 1px solid black;
+  background-color: white;
+  position: absolute;
+  top: 90%;
+  right: 2%;
+  text-align: center;
+  font-size: 500%;
+}
