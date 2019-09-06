@@ -24,7 +24,7 @@ class Player {
     if (locationId === 0 && this.items['batteries']) {
       $('#win_message').text(this.name + ' has won!');
       game.displayWinModal();
-      console.log(this.name + ' has won!')
+      $('.eventLog').append('<br>' + this.name + ' has won!')
     }
   }
 
@@ -58,7 +58,7 @@ class Player {
         this.eatPlayer();
       }
     } else {
-      console.log('Cant move that way!');
+      $('.eventLog').append('<br>' + 'Cant move that way!');
     }
   }
 
@@ -83,7 +83,7 @@ class Player {
       $('.' + this.name).find('#' + itemUsed).remove();
       switch(itemUsed) {
         case 'torch':
-          console.log(this.name + ' has used a torch!');
+          $('.eventLog').append('<br>' + this.name + ' has used a torch!');
           for(var index = 0; index < 2; index++) {
             var directions = this.location.checkDirections();
             var randomDirection = directions[Math.floor((Math.random()*directions.length))];
@@ -91,16 +91,15 @@ class Player {
           }
           break;
         case 'bat':
-          console.log(this.name + ' has used a bat!');
+          $('.eventLog').append('<br>' + this.name + ' has used a bat!');
           for (var index = 0; index < 4; index++) {
             var directions = this.location.checkDirections();
             var randomDirection = directions[Math.floor((Math.random() * directions.length))];
-            console.log(randomDirection);
             this.moveInDirection('tile'+randomDirection);
           }
           break;
         case 'shovel':
-          console.log(this.name + ' has used a shovel!');
+          $('.eventLog').append('<br>' + this.name + ' has used a shovel!');
           for (var index = 0; index < 3; index++) {
             var directions = this.location.checkDirections();
             var randomDirection = directions[Math.floor((Math.random() * directions.length))];
@@ -108,7 +107,7 @@ class Player {
           }
           break;
         case 'shotgun':
-          console.log(this.name + ' has killed a zombie!');
+          $('.eventLog').append('<br>' + this.name + ' has killed a zombie!');
           this.location.domElement.find('.zombieIcon').remove();
           this.location.removeEntity(zombie);
           break;
