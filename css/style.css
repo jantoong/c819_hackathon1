@@ -1,0 +1,303 @@
+body{
+  background-color: rgb(5, 46, 5);
+}
+.board_area {
+  display: inline-block;
+  top: -3%;
+  left: -28%;
+  height: 51vw;
+  width: 120%;
+  position: absolute;
+  background-image: radial-gradient(circle, rgb(21, 22, 22), rgb(2, 41, 11), rgb(5, 46, 5));
+}
+
+.ring {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  /* border: 1px solid black; */
+}
+
+.ring0 {
+  height: 30px;
+  width: 30px;
+}
+
+.ring1 {
+  height: 130px;
+  width: 130px;
+}
+
+.ring2 {
+  height: 230px;
+  width: 230px;
+}
+
+.ring3 {
+  height: 330px;
+  width: 330px;
+}
+
+.ring4 {
+  height: 430px;
+  width: 430px;
+}
+
+.ring5 {
+  height: 530px;
+  width: 530px;
+}
+
+.ring6 {
+  height: 630px;
+  width: 630px;
+}
+
+.ring7 {
+  height: 730px;
+  width: 730px;
+}
+
+.ring8 {
+  height: 830px;
+  width: 830px;
+}
+
+.ring9 {
+  height: 930px;
+  width: 930px;
+}
+
+.ring10 {
+  height: 1030px;
+  width: 1030px;
+}
+
+.tile {
+  display: inline-block;
+  height: 50px;
+  width: 70px;
+  border: 3px solid rgb(10, 10, 10);
+  background-color: rgb(61, 53, 53);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+}
+
+.playerIcon, .zombieIcon {
+  position: absolute;
+  z-index: 10;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  background-color: transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+#shovel.board, #bat.board, #torch.board {
+  position: absolute;
+  z-index: 10;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  background-color: transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+ #shotgun.board, #batteries.board{
+  position: absolute;
+  z-index: 10;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  background-color: transparent;
+  top: 0%;
+  left: 0%;
+  transform: translate(0%, 0%)
+ }
+
+  #batteries.board{
+  position: absolute;
+  z-index: 10;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  background-color: transparent;
+  top: 75%;
+  left: 100%;
+  transform: translate(-75%, -100%)
+ }
+
+
+#shovel {
+  background-image: url(../assets/shovel.png);
+}
+
+#torch {
+  background-image: url(../assets/torch.png);
+}
+
+#batteries {
+  background-image: url(../assets/batteries.png);
+}
+
+#shotgun {
+  background-image: url(../assets/shotgun.png);
+}
+
+#bat {
+  background-image: url(../assets/bat.png);
+}
+
+.playerItem {
+  position: relative;
+  display: flex;
+  height: 70px;
+  width: 70px;
+  background-size: cover;
+}
+
+.playerBoxContainer {
+  height: 62.5%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid black;
+  background-color: white;
+  text-align: center;
+  overflow: auto;
+}
+
+.playerBox {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: 10%;
+  border: 1px solid black;
+  background-color: white;
+  text-align: left;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 200%;
+}
+
+.rollbox, .turnBox{
+  box-sizing: border-box;
+  display: flex;
+  width: 50%;
+  background-color: white;
+  border: 1px black solid;
+  justify-content: center;
+  align-items: center;
+  font-size: 500%;
+}
+img{
+  width: 100%;
+}
+.turnBox{
+  background-color: rgb(7, 18, 6);
+  display: flex;
+  background-size: contain;
+  align-content: center;
+  background-repeat: no-repeat;
+}
+.menuContainerBottom {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 35%;
+  width: 100%;
+  align-content: center
+}
+
+
+.turn {
+  color: red;
+  border-color: red;
+}
+
+.itemUseModal {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  height: 400px;
+  width: 500px;
+  background-color: white;
+  border: 1px black solid;
+  top: 25%;
+  left: 25%;
+}
+
+.itemModal {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  background-size: cover;
+}
+
+.modal {
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal_box {
+  background-color: green;
+  border: 1px solid black;
+  width: 50%;
+  margin: 40% auto;
+}
+
+.win_message {
+  text-align: center;
+}
+
+.play_again_button {
+  width: 40%;
+  margin: auto;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.newPlayer {
+  background-color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.menuBoxContainer {
+  position: absolute;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 3px solid white;
+  display: flex;
+  right: 2%;
+  top: 4%;
+  height: 90%;
+  width: 500px;
+}
+
+.eventLog {
+  width: 100%;
+  height: 57%;
+  background-color: white;
+  border: 1px black solid;
+  overflow: auto;
+}
