@@ -10,26 +10,18 @@ class Game {
     this.movementCounter = null;
     this.diceRoll = this.diceRoll.bind(this);
     this.createNewPlayer = this.createNewPlayer.bind(this);
-    this.playerTurn = true;
     this.zombieTurns = [];
     this.zombieMovementCounter = null;
   }
 
   diceRoll() {
-    this.nextZombieTurn();
-    if (this.movementCounter !== null && this.playerTurn === false) {
+    if (this.movementCounter !== null) {
       this.nextPlayersTurn();
     }
     var result = Math.floor(Math.random() * 6) + 1;
     $('.rollbox').text('roll ' + result);
     $('.eventLog').append('<br>' + 'You rolled a ' + result);
     this.movementCounter = result;
-    if (this.playerTurn === false) {
-      this.zombieMovementCounter = result * 2;
-      for (var index of this.zombieTurns) {
-        index.moves = result;
-      }
-    }
     return result;
   }
 
@@ -138,17 +130,26 @@ class Game {
     $('.player' + (this.currentPlayersTurn + 1)).addClass('turn');
   }
 
-  nextZombieTurn() {
-    this.zombieTurns = [];
-    $('.zombieIcon').css('background-color', 'transparent');
-    var random = Math.floor(Math.random() * this.zombies.length);
-    var random2 = Math.floor(Math.random() * this.zombies.length);
-    while(random === random2) {
-      random2 = Math.floor(Math.random() * this.zombies.length);
+  // nextZombieTurn() {
+  //   this.zombieTurns = [];
+  //   $('.zombieIcon').css('background-color', 'transparent');
+  //   var random = Math.floor(Math.random() * this.zombies.length);
+  //   var random2 = Math.floor(Math.random() * this.zombies.length);
+  //   while(random === random2) {
+  //     random2 = Math.floor(Math.random() * this.zombies.length);
+  //   }
+  //   this.zombieTurns.push(this.zombies[random], this.zombies[random2]);
+  //   console.log(this.zombieTurns);
+  // }
+
+  moveZombies() {
+    //this.nextZombieTurn();
+    for (var index = 0; index < 6; index++) {
+      var directions = this.zombies[index].location.checkDirections();
+      var randomDirection = directions[Math.floor((Math.random() * directions.length))];
+      this.zombies[index].moveInDirection('tile' + randomDirection);
     }
-    this.zombieTurns.push(this.zombies[random], this.zombies[random2]);
-    this.zombieTurns[0].domElement.css('background-color', 'green');
-    this.zombieTurns[1].domElement.css('background-color', 'red');
+
   }
 
   moveSpacesDom(playerObj, newLocationObj) {

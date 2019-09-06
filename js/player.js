@@ -58,8 +58,12 @@ class Player {
         this.eatPlayer();
       }
     } else {
+
       $('.eventLog').append('<br>' + 'Cant move that way!');
+      return false;
+
     }
+    return true;
   }
 
   checkItem() {
