@@ -59,7 +59,9 @@ class Player {
       }
     } else {
       console.log('Cant move that way!');
+      return false;
     }
+    return true;
   }
 
   checkItem() {
