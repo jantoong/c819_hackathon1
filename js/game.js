@@ -20,7 +20,7 @@ class Game {
     }
     var result = Math.floor(Math.random() * 6) + 1;
     $('.rollbox').text('roll ' + result);
-    console.log('you rolled a ' + result);
+    $('.eventLog').append('<br>' + 'You rolled a ' + result);
     this.movementCounter = result;
     return result;
   }
@@ -66,8 +66,10 @@ class Game {
   }
 
   createNewPlayer() {
+
     var playerNumber = this.players.length + 1;
     var newplayer = new Player('player' + playerNumber);
+    $('.eventLog').append('<br>' + newplayer.name + ' has joined!');
     var target = $('#tile0');
     tileList['tile0'].entities.push(newplayer);
     newplayer.renderPlayer(target);
@@ -147,6 +149,7 @@ class Game {
       var randomDirection = directions[Math.floor((Math.random() * directions.length))];
       this.zombies[index].moveInDirection('tile' + randomDirection);
     }
+
   }
 
   moveSpacesDom(playerObj, newLocationObj) {
@@ -156,7 +159,7 @@ class Game {
   }
 
   killPlayer(player) {
-    console.log(player.name + ' has been eaten!');
+    $('.eventLog').append('<br>' + player.name + ' has been eaten!');
     player.domElement.remove();
     player.location.removeEntity(player);
     game.players.splice(game.players.indexOf(player),1);
@@ -165,12 +168,13 @@ class Game {
 
   gameOverCheck() {
     if(this.players.length === 0) {
-      console.log('GAME OVER');
+      $('.eventLog').append('<br>' + 'Game Over');
     }
   }
 
   userItemInput(player) {
     $('.itemUseModal').show();
+    $('.eventLog').append('<br>' + 'Choose an item to use');
     for(var item in player.items) {
       $('.itemUseModal').append($('<div>').attr('id', item).addClass('itemModal'));
       $('.itemModal').on('click', this.returnItemChosen);
