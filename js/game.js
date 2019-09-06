@@ -130,26 +130,15 @@ class Game {
     $('.player' + (this.currentPlayersTurn + 1)).addClass('turn');
   }
 
-  // nextZombieTurn() {
-  //   this.zombieTurns = [];
-  //   $('.zombieIcon').css('background-color', 'transparent');
-  //   var random = Math.floor(Math.random() * this.zombies.length);
-  //   var random2 = Math.floor(Math.random() * this.zombies.length);
-  //   while(random === random2) {
-  //     random2 = Math.floor(Math.random() * this.zombies.length);
-  //   }
-  //   this.zombieTurns.push(this.zombies[random], this.zombies[random2]);
-  //   console.log(this.zombieTurns);
-  // }
-
   moveZombies() {
-    //this.nextZombieTurn();
-    for (var index = 0; index < 6; index++) {
-      var directions = this.zombies[index].location.checkDirections();
-      var randomDirection = directions[Math.floor((Math.random() * directions.length))];
-      this.zombies[index].moveInDirection('tile' + randomDirection);
+    var randomNumber = (Math.floor(Math.random()*6) + 1);
+    for (var moveIndex = 0; moveIndex < randomNumber; moveIndex++){
+      for (var index = 0; index < 6; index++) {
+        var directions = this.zombies[index].location.checkDirections();
+        var randomDirection = directions[Math.floor((Math.random() * directions.length))];
+        this.zombies[index].moveInDirection('tile' + randomDirection);
+      }
     }
-
   }
 
   moveSpacesDom(playerObj, newLocationObj) {
