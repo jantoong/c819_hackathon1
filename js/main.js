@@ -20,36 +20,21 @@ function createDOM() {
 }
 
 function tileInfo(event) {
-  if (game.playerTurn) {
-    if (game.movementCounter > 0) {
-      var target = $(event.currentTarget).attr('id');
-      game.players[game.getTurn()].moveInDirection(target);
-      game.movementCounter--;
-      if(game.movementCounter === 0) {
-        game.playerTurn = false;
-      }
-      return game.players[game.getTurn()].location;
-    }
-  } else {
-    if (game.zombieMovementCounter > 0) {
-      if (game.zombieTurns[0].moves > 0) {
-        var target = $(event.currentTarget).attr('id');
-        game.zombieTurns[0].moveInDirection(target);
-        game.zombieMovementCounter--;
-        game.zombieTurns[0].moves--;
-        return game.zombies[0].location;
-      }
-      if (game.zombieTurns[1].moves > 0) {
-        var target = $(event.currentTarget).attr('id');
-        game.zombieTurns[1].moveInDirection(target);
-        game.zombieMovementCounter--;
-        game.zombieTurns[1].moves--;
-        if (game.zombieMovementCounter === 0) {
-          game.playerTurn = true;
-        }
-        return game.zombies[1].location;
-      }
+  var target = $(event.currentTarget).attr('id');
+  //debugger;
+  for(entity of tileList[target].entities) {
+    if (entity.includes(game.zombies)){
+      return;
     }
   }
-
+  if (game.movementCounter > 0) {
+  var result = game.players[game.getTurn()].moveInDirection(target);
+  if(result){
+    game.movementCounter--;
+  }
+  if(game.movementCounter === 0) {
+    game.moveZombies();
+  }
+  return game.players[game.getTurn()].location;
+  }
 }
