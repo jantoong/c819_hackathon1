@@ -1,3 +1,5 @@
+# https://www.figma.com/file/S1tq1LIJOEiDTKYrKR2a9r/Untitled?node-id=0%3A1
+
 # c819_hackathon1
 
 # complete the project assigned to your group.  All projects MUST be in OOP
@@ -40,16 +42,15 @@
 
 ### Team 5
 - Project : Imhotep
-- members: 
+- members:
   - Anjaleena Barclay
   - Noel Carino
   - Tarun Padath
   - Michael Chang
-  
+
 ### Team 6
 - Project : Gemstone Mining
-- members: 
+- members:
   - James Cho
   - Uzair Ashraf
   - Sean Hughes
-
