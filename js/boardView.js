@@ -1,9 +1,9 @@
+var tileIDCounter = 0;
 var tileList = {};
 
-class CreateBoard{
+class BoardView{
   constructor() {
     this.numberOfTilesInRings = [1, 4, 4, 16, 4, 24, 4, 32, 4, 4, 4];
-    this.radius = null;
     this.translateXValues = [];
     this.translateYValues = [];
     this.rotateValues = [];
@@ -12,8 +12,7 @@ class CreateBoard{
   }
 
   calculateRadius(ringNumber) {
-    this.radius = (this.baseRadius + this.radiusDelta * ringNumber) / 2;
-    return this.radius;
+    return (this.baseRadius + this.radiusDelta * ringNumber) / 2;
   }
 
   calculateXValues(ringNumber) {
@@ -86,7 +85,6 @@ class CreateBoard{
   }
 
   resetProperties() {
-    this.radius = null;
     this.translateXValues = [];
     this.translateYValues = [];
     this.rotateValues = [];
@@ -94,7 +92,7 @@ class CreateBoard{
 
   makeTileRing(ringNumber) {
     for (var i = 0; i < this.numberOfTilesInRings[ringNumber]; i++) {
-      var newTile = $('<div>').addClass('tile').attr('id', 'tile' + tileIDCounter);//.text(tileIDCounter);
+      var newTile = $('<div>').addClass('tile').attr('id', 'tile' + tileIDCounter).text(tileIDCounter);
       newTile.css('transform', 'translate(' + this.calculateXValues(ringNumber)[i] + 'px ,' + this.calculateYValues(ringNumber)[i] + 'px) rotate(' + this.calculateRotateValues(ringNumber)[i] + 'deg)');
       var newTileObj = new Tile(tileIDCounter);
       newTileObj.domElement = newTile;
