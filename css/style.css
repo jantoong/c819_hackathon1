@@ -1,24 +1,22 @@
 body{
-  background-color: rgb(5, 46, 5);
+  background-color: rgb(1, 59, 1);
 }
 .board_area {
-  display: inline-block;
   top: -3%;
   left: -28%;
   height: 51vw;
   width: 120%;
   position: absolute;
-  background-image: radial-gradient(circle, rgb(21, 22, 22), rgb(2, 41, 11), rgb(5, 46, 5));
+  background-image: radial-gradient(circle, rgb(8, 8, 8), rgb(16, 41, 16), rgb(1, 59, 1));
 }
 
 .ring {
-  display: inline-block;
+  display: block;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  /* border: 1px solid black; */
 }
 
 .ring0 {
@@ -77,32 +75,21 @@ body{
 }
 
 .tile {
-  display: inline-block;
+  display: block;
   height: 50px;
   width: 70px;
-  border: 3px solid rgb(10, 10, 10);
-  background-color: rgb(61, 53, 53);
+  border: 3px solid rgb(17, 17, 17);
+  background-color: rgb(41, 37, 37);
   position: absolute;
   top: 50%;
   left: 50%;
   text-align: center;
 }
 
-.playerIcon, .zombieIcon {
-  position: absolute;
-  z-index: 10;
-  height: 40px;
-  width: 40px;
-  background-size: cover;
-  background-color: transparent;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%)
-}
-
+.player_icon, .zombie_icon,
 #shovel.board, #bat.board, #torch.board {
   position: absolute;
-  z-index: 10;
+  z-index: 1;
   height: 40px;
   width: 40px;
   background-size: cover;
@@ -112,9 +99,9 @@ body{
   transform: translate(-50%, -50%)
 }
 
- #shotgun.board, #batteries.board{
+#shotgun.board {
   position: absolute;
-  z-index: 10;
+  z-index: 1;
   height: 40px;
   width: 40px;
   background-size: cover;
@@ -126,7 +113,7 @@ body{
 
   #batteries.board{
   position: absolute;
-  z-index: 10;
+  z-index: 1;
   height: 40px;
   width: 40px;
   background-size: cover;
@@ -157,7 +144,7 @@ body{
   background-image: url(../assets/bat.png);
 }
 
-.playerItem {
+.player_item {
   position: relative;
   display: flex;
   height: 70px;
@@ -165,66 +152,58 @@ body{
   background-size: cover;
 }
 
-.playerBoxContainer {
+.player_box_container {
   height: 62.5%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
   border: 1px solid black;
-  background-color: white;
-  text-align: center;
+  background-color: rgb(83, 52, 52);
   overflow: auto;
 }
 
-.playerBox {
-  display: flex;
+.player_box {
   box-sizing: border-box;
-  width: 100%;
+  display: flex;
   height: 10%;
   border: 1px solid black;
-  background-color: white;
+  background-color: rgb(224, 198, 198);
   text-align: left;
-  flex-direction: row;
-  flex-wrap: wrap;
   font-size: 200%;
 }
 
-.rollbox, .turnBox{
+.rollbox, .turn_box{
   box-sizing: border-box;
   display: flex;
   width: 50%;
+  height: 40%;
   background-color: white;
   border: 1px black solid;
   justify-content: center;
   align-items: center;
   font-size: 500%;
 }
+
 img{
   width: 100%;
 }
-.turnBox{
+
+.turn_box{
   background-color: rgb(7, 18, 6);
   display: flex;
   background-size: contain;
   align-content: center;
   background-repeat: no-repeat;
 }
-.menuContainerBottom {
+.menu_container_bottom {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   height: 35%;
-  width: 100%;
-  align-content: center
 }
-
 
 .turn {
   color: red;
   border-color: red;
 }
 
-.itemUseModal {
+.item_use_modal {
   display: none;
   position: absolute;
   z-index: 10;
@@ -236,7 +215,7 @@ img{
   left: 25%;
 }
 
-.itemModal {
+.item_modal {
   display: flex;
   height: 100px;
   width: 100px;
@@ -245,59 +224,68 @@ img{
 
 .modal {
   position: fixed;
-  z-index: 20;
+  z-index: 2;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: rgba(0,0,0,0.5);
 }
 
 .modal_box {
-  background-color: green;
-  border: 1px solid black;
-  width: 50%;
-  margin: 40% auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(23, 63, 23);
+  border: 3px solid rgb(34, 34, 34);
+  width: 30%;
+  height: 30%;
+  margin-left: 30%;
+  margin-top: 15%;
 }
 
 .win_message {
-  text-align: center;
+  margin-bottom: 10%;
+  font-size: 300%;
+  color: rgba(255, 255, 255, 0.63);
 }
 
 .play_again_button {
-  width: 40%;
-  margin: auto;
-  border: 1px solid black;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 30%;
+  padding: 1%;
+  border: 1px solid rgba(255, 255, 255, 0.63);
+  color: rgba(255, 255, 255, 0.63);
 }
 
 .hidden {
   display: none;
 }
 
-.newPlayer {
-  background-color: white;
-  width: 100%;
+.new_player {
+  background-color: rgb(63, 58, 58);
+  color: white;
   text-align: center;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
 }
 
-.menuBoxContainer {
+.menu_box_container {
   position: absolute;
-  flex-direction: row;
   flex-wrap: wrap;
-  border: 3px solid white;
-  display: flex;
+  border: 3px solid rgb(82, 39, 39);
   right: 2%;
   top: 4%;
   height: 90%;
   width: 500px;
 }
 
-.eventLog {
+.event_log {
   width: 100%;
-  height: 57%;
-  background-color: white;
+  height: 60%;;
+  background-color: rgb(224, 198, 198);
   border: 1px black solid;
   overflow: auto;
 }
