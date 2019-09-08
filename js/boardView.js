@@ -104,7 +104,6 @@ class BoardView{
   }
 
   makeAllRings() {
-    debugger;
     var innerRing = $('<div>').addClass('ring').addClass('ring' + 0).attr('id', "ring" + 0);
     for (var i = 0; i < this.numberOfTilesInRings.length; i++) {
       this.makeTileRing(i, innerRing);
