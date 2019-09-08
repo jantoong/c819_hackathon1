@@ -90,22 +90,28 @@ class BoardView{
     this.rotateValues = [];
   }
 
-  makeTileRing(ringNumber) {
+  makeTileRing(ringNumber, appendTarget) {
     for (var i = 0; i < this.numberOfTilesInRings[ringNumber]; i++) {
       var newTile = $('<div>').addClass('tile').attr('id', 'tile' + tileIDCounter).text(tileIDCounter);
       newTile.css('transform', 'translate(' + this.calculateXValues(ringNumber)[i] + 'px ,' + this.calculateYValues(ringNumber)[i] + 'px) rotate(' + this.calculateRotateValues(ringNumber)[i] + 'deg)');
       var newTileObj = new Tile(tileIDCounter);
       newTileObj.domElement = newTile;
       tileList['tile' + tileIDCounter] = newTileObj;
-      $('#ring' + ringNumber).append(newTile);
+      appendTarget.append(newTile);
       tileIDCounter++;
     }
+    return appendTarget;
   }
 
   makeAllRings() {
+    debugger;
+    var innerRing = $('<div>').addClass('ring').addClass('ring' + 0).attr('id', "ring" + 0);
     for (var i = 0; i < this.numberOfTilesInRings.length; i++) {
-      this.makeTileRing(i);
+      this.makeTileRing(i, innerRing);
+      console.log(innerRing);
+      innerRing = $('<div>').addClass('ring').addClass('ring' + (i + 1)).attr('id', "ring" + (i + 1)).append(innerRing)
       this.resetProperties();
     }
+    innerRing.appendTo('.board_area');
   }
 }
