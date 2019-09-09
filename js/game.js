@@ -33,6 +33,7 @@ class Game {
       for (var zombie of this.zombies) {
         if (entity === zombie) {
           $('.event_log').append('<br>' + "Can't go that way!");
+          this.scrollEventLogToBottom();
           return;
         }
       }
@@ -53,10 +54,35 @@ class Game {
 
   diceRoll() {
     var result = Math.floor(Math.random() * 6) + 1;
-    $('.rollbox').text('roll ' + result);
-    $('.event_log').append('<br>' + 'You rolled a ' + result);
+    this.displayDiceRollIcon(result);
+    $('.event_log').append('<br>' + 'You rolled a ' + result + '. Move ' + result + ' spaces.');
+    this.scrollEventLogToBottom();
     this.movementCounter = result;
     return result;
+  }
+
+  displayDiceRollIcon(rollResult) {
+    $('#dice_icon').removeClass('fa-dice fa-dice-one fa-dice-two fa-dice-three fa-dice-four fa-dice-five fa-dice-six');
+    switch (rollResult) {
+      case 1:
+        $('#dice_icon').addClass('fa-dice-one');
+        break;
+      case 2:
+        $('#dice_icon').addClass('fa-dice-two');
+        break;
+      case 3:
+        $('#dice_icon').addClass('fa-dice-three');
+        break;
+      case 4:
+        $('#dice_icon').addClass('fa-dice-four');
+        break;
+      case 5:
+        $('#dice_icon').addClass('fa-dice-five');
+        break;
+      case 6:
+        $('#dice_icon').addClass('fa-dice-six');
+        break;
+    }
   }
 
   createZombies() {
@@ -110,6 +136,7 @@ class Game {
       this.currentPlayer = this.players[this.players.indexOf(this.currentPlayer) + 1];
     }
     $('.event_log').append('<br>' + this.currentPlayer.name +"'s turn to roll!");
+    this.scrollEventLogToBottom();
     $(this.currentPlayer.playerBoxDomElement).toggleClass('turn');
   }
 
@@ -132,6 +159,8 @@ class Game {
 
   killPlayer(player) {
     $('.event_log').append('<br>' + player.name + ' has been eaten!');
+    this.scrollEventLogToBottom();
+    $('.' + player.name).css('text-decoration', 'line-through');
     player.domElement.remove();
     player.location.removeEntity(player);
     game.players.splice(game.players.indexOf(player),1);
@@ -141,12 +170,16 @@ class Game {
   gameOverCheck() {
     if(this.players.length === 0) {
       $('.event_log').append('<br>' + 'Game Over');
+      this.scrollEventLogToBottom();
     }
   }
 
   userItemInput(player) {
     $('.item_use_modal').show();
+    $('.item_use_modal').append($('<p>').addClass('item_modal_text').text('Items'));
+    $('.event_log').append('<br>' + 'A zombie has attacked you!');
     $('.event_log').append('<br>' + 'Choose an item to use');
+    this.scrollEventLogToBottom();
     for(var item in player.items) {
       $('.item_use_modal').append($('<div>').attr('id', item).addClass('item_modal'));
       $('.item_modal').on('click', this.returnItemChosen);
@@ -178,6 +211,11 @@ class Game {
     $('#play_again_button').off('click');
     $('.new_player').off('click');
     tileIDCounter = 0;
-    this.start();
+    game.start();
+  }
+
+  scrollEventLogToBottom() {
+    var eventLog = document.getElementById('event_log');
+    eventLog.scrollTop = eventLog.scrollHeight;
   }
 }
