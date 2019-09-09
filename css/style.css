@@ -178,7 +178,7 @@ body{
   border: 1px black solid;
   justify-content: center;
   align-items: center;
-  font-size: 500%;
+  font-size: 400%;
 }
 
 img{
@@ -216,10 +216,14 @@ img{
 }
 
 .item_modal {
-  display: flex;
+  display: inline-block;
   height: 100px;
   width: 100px;
   background-size: cover;
+}
+
+.item_modal:hover {
+  border: 1px solid darkgreen;
 }
 
 .modal {
@@ -288,4 +292,15 @@ img{
   background-color: rgb(224, 198, 198);
   border: 1px black solid;
   overflow: auto;
+}
+
+.item_modal_text {
+  text-align: center;
+  font-size: 2em;
+  margin: 0;
+}
+
+.player_icon {
+  line-height: 6;
+  color: yellowgreen;
 }

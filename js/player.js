@@ -13,7 +13,7 @@ class Player {
 
   renderPlayer(startingLocation) {
     var target = startingLocation;
-    this.domElement = $('<div>').attr('id', '' + this.name).addClass('player_icon');
+    this.domElement = $('<div>').attr('id', '' + this.name).addClass('player_icon').text(this.name);
     this.domElement.css('background-image', 'url(../assets/player.png)');
     target.append(this.domElement);
     this.locationDomElement = this.domElement.parent;
@@ -27,6 +27,7 @@ class Player {
       $('#win_message').text(this.name + ' has won!');
       game.displayWinModal();
       $('.event_log').append('<br>' + this.name + ' has won!')
+      game.scrollEventLogToBottom();
     }
   }
 
@@ -50,6 +51,7 @@ class Player {
     } else {
 
       $('.event_log').append('<br>' + 'Cant move that way!');
+      game.scrollEventLogToBottom();
       return false;
 
     }
@@ -78,6 +80,7 @@ class Player {
       switch(itemUsed) {
         case 'torch':
           $('.event_log').append('<br>' + this.name + ' has used a torch!');
+          game.scrollEventLogToBottom();
           for(var index = 0; index < 2; index++) {
             var directions = this.location.checkDirections();
             var randomDirection = directions[Math.floor((Math.random()*directions.length))];
@@ -86,6 +89,7 @@ class Player {
           break;
         case 'bat':
           $('.event_log').append('<br>' + this.name + ' has used a bat!');
+          game.scrollEventLogToBottom();
           for (var index = 0; index < 4; index++) {
             var directions = this.location.checkDirections();
             var randomDirection = directions[Math.floor((Math.random() * directions.length))];
@@ -94,6 +98,7 @@ class Player {
           break;
         case 'shovel':
           $('.event_log').append('<br>' + this.name + ' has used a shovel!');
+          game.scrollEventLogToBottom();
           for (var index = 0; index < 3; index++) {
             var directions = this.location.checkDirections();
             var randomDirection = directions[Math.floor((Math.random() * directions.length))];
@@ -102,6 +107,7 @@ class Player {
           break;
         case 'shotgun':
           $('.event_log').append('<br>' + this.name + ' has killed a zombie!');
+          game.scrollEventLogToBottom();
           this.location.domElement.find('.zombie_icon').remove();
           this.location.removeEntity(zombie);
           break;
