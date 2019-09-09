@@ -2,48 +2,27 @@
 <html>
   <head>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/ab6b2503d1.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="../js/board.js"></script>
-    <script src="../js/createboard.js"></script>
+    <script src="../js/boardView.js"></script>
     <script src="../js/player.js"></script>
     <script src="../js/tile.js"></script>
     <script src="../js/game.js"></script>
-    <script src="../js/populateBoard.js"></script>
+    <script src="../js/tileNeighborLookup.js"></script>
     <script src="../js/main.js"></script>
     <title>Oh No Zombies!</title>
   </head>
   <body>
-    <div class="itemUseModal"></div>
+    <div class="item_use_modal"></div>
     <div class="board_area">
-      <div class="ring ring10" id="ring10">
-        <div class="ring ring9" id="ring9">
-          <div class="ring ring8" id="ring8">
-            <div class="ring ring7" id="ring7">
-              <div class="ring ring6" id="ring6">
-                <div class="ring ring5" id="ring5">
-                  <div class="ring ring4" id="ring4">
-                    <div class="ring ring3" id="ring3">
-                      <div class="ring ring2" id="ring2">
-                        <div class="ring ring1" id="ring1">
-                          <div class="ring ring0" id="ring0"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="menuBoxContainer">
-      <div class="playerBoxContainer"></div>
-      <div class="newPlayer">NEW PLAYER</div>
-      <div class="menuContainerBottom">
-        <div class="eventLog">Game Start</div>
-        <div class='rollbox'>roll</div>
-        <div class="turnBox"><img src="../assets/logo.png" alt="Oh No... Zombies!"></div>
+    <div class="menu_box_container">
+      <div class="player_box_container"></div>
+      <div class="new_player">NEW PLAYER</div>
+      <div class="menu_container_bottom">
+        <div class="event_log" id="event_log">Game Start</div>
+        <div class='rollbox'>Roll:&nbsp;<i id="dice_icon" class="fas fa-dice"></i></div>
+        <div class="turn_box"><img src="../assets/logo.png" alt="Oh No... Zombies!"></div>
       </div>
     </div>
     <div class="modal hidden" id="win_modal">

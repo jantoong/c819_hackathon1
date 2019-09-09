@@ -1,139 +1,149 @@
 class Game {
   constructor() {
-    this.diceTypes = [6,3];
-    this.possibleZombieTypes = ['light', 'medium', 'dark'];
     this.players = [];
     this.zombies = [];
-    this.currentPlayersTurn = 0;
-    this.zzz;
-    this.turnCounter = 0;
+    this.currentPlayer = null;
     this.movementCounter = null;
-    this.diceRoll = this.diceRoll.bind(this);
-    this.createNewPlayer = this.createNewPlayer.bind(this);
     this.zombieTurns = [];
     this.zombieMovementCounter = null;
+    this.diceRoll = this.diceRoll.bind(this);
+    this.createNewPlayer = this.createNewPlayer.bind(this);
+    this.start = this.start.bind(this);
+    this.tileClickHandler = this.tileClickHandler.bind(this);
+  }
+
+  start() {
+    board.makeAllRings();
+    this.createZombies();
+    this.renderItems();
+    $('.rollbox').on('click', this.diceRoll);
+    $('#play_again_button').click(this.resetGame).click(this.hideWinModal);
+    this.createNewPlayer();
+    this.currentPlayer = this.players[0];
+    $('.new_player').on('click', this.createNewPlayer);
+    $('.tile').on('click', this.tileClickHandler);
+    $('.event_log').append('<br>' + this.players[0].name + "'s turn to roll!");
+    $('.player_box.player1').toggleClass('turn');
+  }
+
+  tileClickHandler(event) {
+    var target = $(event.currentTarget).attr('id');
+
+    for (var entity of tileList[target].entities) {
+      for (var zombie of this.zombies) {
+        if (entity === zombie) {
+          $('.event_log').append('<br>' + "Can't go that way!");
+          this.scrollEventLogToBottom();
+          return;
+        }
+      }
+    }
+
+    if (this.movementCounter > 0) {
+      var result = this.currentPlayer.moveInDirection(target);
+      if (result) {
+        this.movementCounter--;
+      }
+      if (this.movementCounter === 0) {
+        this.moveZombies();
+        this.advanceTurn();
+      }
+      return;
+    }
   }
 
   diceRoll() {
-    if (this.movementCounter !== null) {
-      this.nextPlayersTurn();
-    }
     var result = Math.floor(Math.random() * 6) + 1;
-    $('.rollbox').text('roll ' + result);
-    $('.eventLog').append('<br>' + 'You rolled a ' + result);
+    this.displayDiceRollIcon(result);
+    $('.event_log').append('<br>' + 'You rolled a ' + result + '. Move ' + result + ' spaces.');
+    this.scrollEventLogToBottom();
     this.movementCounter = result;
     return result;
   }
 
+  displayDiceRollIcon(rollResult) {
+    $('#dice_icon').removeClass('fa-dice fa-dice-one fa-dice-two fa-dice-three fa-dice-four fa-dice-five fa-dice-six');
+    switch (rollResult) {
+      case 1:
+        $('#dice_icon').addClass('fa-dice-one');
+        break;
+      case 2:
+        $('#dice_icon').addClass('fa-dice-two');
+        break;
+      case 3:
+        $('#dice_icon').addClass('fa-dice-three');
+        break;
+      case 4:
+        $('#dice_icon').addClass('fa-dice-four');
+        break;
+      case 5:
+        $('#dice_icon').addClass('fa-dice-five');
+        break;
+      case 6:
+        $('#dice_icon').addClass('fa-dice-six');
+        break;
+    }
+  }
+
   createZombies() {
-    var zombie1 = new Zombie('zombie1');
-    zombie1.zombieType = this.possibleZombieTypes[0];
-    zombie1.location = tileList['tile35'];
-    tileList['tile35'].entities.push(zombie1);
-    zombie1.renderZombie($('#tile35'));
+    var zombieStartingTile =
+      ['tile35', 'tile47', 'tile61',
+       'tile69', 'tile77', 'tile85',
+       'tile41', 'tile29', 'tile25',
+       'tile27'];
+    var zombieCounter = 1;
 
-    var zombie2 = new Zombie('zombie2');
-    zombie2.zombieType = this.possibleZombieTypes[0];
-    zombie2.location = tileList['tile47'];
-    tileList['tile47'].entities.push(zombie2);
-    zombie2.renderZombie($('#tile47'));
-
-    var zombie3 = new Zombie('zombie3');
-    zombie3.zombieType = this.possibleZombieTypes[1];
-    zombie3.location = tileList['tile61'];
-    tileList['tile61'].entities.push(zombie3);
-    zombie3.renderZombie($('#tile61'));
-
-    var zombie4 = new Zombie('zombie4');
-    zombie4.zombieType = this.possibleZombieTypes[1];
-    zombie4.location = tileList['tile69'];
-    tileList['tile69'].entities.push(zombie4);
-    zombie4.renderZombie($('#tile69'));
-
-    var zombie5 = new Zombie('zombie5');
-    zombie5.zombieType = this.possibleZombieTypes[2];
-    zombie5.location = tileList['tile77'];
-    tileList['tile77'].entities.push(zombie5);
-    zombie5.renderZombie($('#tile77'));
-
-    var zombie6 = new Zombie('zombie6');
-    zombie6.zombieType = this.possibleZombieTypes[2];
-    zombie6.location = tileList['tile85'];
-    tileList['tile85'].entities.push(zombie6);
-    zombie6.renderZombie($('#tile85'));
-
-    this.zombies.push(zombie1, zombie2, zombie3, zombie4, zombie5, zombie6);
+    for (var tile of zombieStartingTile) {
+      var newZombie = new Zombie('zombie' + zombieCounter);
+      newZombie.location = tileList[tile];
+      tileList[tile].entities.push(newZombie);
+      newZombie.renderZombie($('#' + tile));
+      this.zombies.push(newZombie)
+    }
   }
 
   createNewPlayer() {
-
-    var playerNumber = this.players.length + 1;
-    var newplayer = new Player('player' + playerNumber);
-    $('.eventLog').append('<br>' + newplayer.name + ' has joined!');
+    var newPlayer = new Player('player' + (game.players.length + 1));
+    $('.event_log').append('<br>' + newPlayer.name + ' has joined!');
     var target = $('#tile0');
-    tileList['tile0'].entities.push(newplayer);
-    newplayer.renderPlayer(target);
-    this.players.push(newplayer);
-    $('.playerBoxContainer').append($('<div>').addClass('playerBox').addClass('player' + playerNumber).text('PLAYER' + playerNumber));
-
+    tileList['tile0'].entities.push(newPlayer);
+    newPlayer.renderPlayer(target);
+    this.players.push(newPlayer);
   }
 
   renderItems() {
-    tileList['tile19'].item['shovel'] = 1;
-    tileList['tile11'].item['shovel'] = 1;
-    tileList['tile19'].domElement.append($('<div>').attr('id', 'shovel').addClass('board'));
-    tileList['tile11'].domElement.append($('<div>').attr('id', 'shovel').addClass('board'));
-
-    tileList['tile26'].item['torch'] = 1;
-    tileList['tile28'].item['torch'] = 1;
-    tileList['tile26'].domElement.append($('<div>').attr('id', 'torch').addClass('board'));
-    tileList['tile28'].domElement.append($('<div>').attr('id', 'torch').addClass('board'));
-
-    tileList['tile81'].item['bat'] = 1;
-    tileList['tile73'].item['bat'] = 1;
-    tileList['tile65'].item['bat'] = 1;
-    tileList['tile57'].item['bat'] = 1;
-    tileList['tile81'].domElement.append($('<div>').attr('id', 'bat').addClass('board'));
-    tileList['tile73'].domElement.append($('<div>').attr('id', 'bat').addClass('board'));
-    tileList['tile65'].domElement.append($('<div>').attr('id', 'bat').addClass('board'));
-    tileList['tile57'].domElement.append($('<div>').attr('id', 'bat').addClass('board'));
-
-    tileList['tile98'].item['batteries'] = 1;
-    tileList['tile99'].item['batteries'] = 1;
-    tileList['tile100'].item['batteries'] = 1;
-    tileList['tile97'].item['batteries'] = 1;
-    tileList['tile99'].domElement.append($('<div>').attr('id', 'batteries').addClass('board'));
-    tileList['tile100'].domElement.append($('<div>').attr('id', 'batteries').addClass('board'));
-    tileList['tile97'].domElement.append($('<div>').attr('id', 'batteries').addClass('board'));
-
-    tileList['tile98'].item['shotgun'] = 1;
-    tileList['tile99'].item['shotgun'] = 1;
-    tileList['tile100'].item['shotgun'] = 1;
-    tileList['tile97'].item['shotgun'] = 1;
-    tileList['tile98'].domElement.append($('<div>').attr('id', 'shotgun').addClass('board'));
-    tileList['tile99'].domElement.append($('<div>').attr('id', 'shotgun').addClass('board'));
-    tileList['tile100'].domElement.append($('<div>').attr('id', 'shotgun').addClass('board'));
-    tileList['tile97'].domElement.append($('<div>').attr('id', 'shotgun').addClass('board'));
-  }
-
-  getTurn() {
-    return this.currentPlayersTurn;
-  }
-
-  nextPlayersTurn() {
-    this.currentPlayersTurn = ++this.turnCounter % this.players.length;
-    if (this.currentPlayersTurn === 0) {
-      $('.player' + this.players.length).removeClass('turn');
-    } else {
-      $('.player' + this.currentPlayersTurn).removeClass('turn');
+    var itemStartingTiles = {
+      'shovel': ['tile19', 'tile11'],
+      'torch': ['tile26', 'tile28'],
+      'bat': ['tile81', 'tile73', 'tile65', 'tile57'],
+      'batteries' : ['tile97', 'tile98', 'tile99', 'tile100'],
+      'shotgun': ['tile97', 'tile98', 'tile99', 'tile100']
     }
-    $('.player' + (this.currentPlayersTurn + 1)).addClass('turn');
+
+    for (var items in itemStartingTiles) {
+      for (var tiles of itemStartingTiles[items]) {
+        tileList[tiles].item[items] = 1
+        tileList[tiles].domElement.append($('<div>').attr('id', items).addClass('board'));
+      }
+    }
+  }
+
+  advanceTurn() {
+    $(this.currentPlayer.playerBoxDomElement).toggleClass('turn');
+    if(this.currentPlayer === this.players[this.players.length-1]) {
+      this.currentPlayer = this.players[0];
+    } else {
+      this.currentPlayer = this.players[this.players.indexOf(this.currentPlayer) + 1];
+    }
+    $('.event_log').append('<br>' + this.currentPlayer.name +"'s turn to roll!");
+    this.scrollEventLogToBottom();
+    $(this.currentPlayer.playerBoxDomElement).toggleClass('turn');
   }
 
   moveZombies() {
     var randomNumber = (Math.floor(Math.random()*6) + 1);
     for (var moveIndex = 0; moveIndex < randomNumber; moveIndex++){
-      for (var index = 0; index < 6; index++) {
+      for (var index = 0; index < game.zombies.length; index++) {
         var directions = this.zombies[index].location.checkDirections();
         var randomDirection = directions[Math.floor((Math.random() * directions.length))];
         this.zombies[index].moveInDirection('tile' + randomDirection);
@@ -148,7 +158,9 @@ class Game {
   }
 
   killPlayer(player) {
-    $('.eventLog').append('<br>' + player.name + ' has been eaten!');
+    $('.event_log').append('<br>' + player.name + ' has been eaten!');
+    this.scrollEventLogToBottom();
+    $('.' + player.name).css('text-decoration', 'line-through');
     player.domElement.remove();
     player.location.removeEntity(player);
     game.players.splice(game.players.indexOf(player),1);
@@ -157,21 +169,26 @@ class Game {
 
   gameOverCheck() {
     if(this.players.length === 0) {
-      $('.eventLog').append('<br>' + 'Game Over');
+      $('.event_log').append('<br>' + 'Game Over');
+      this.scrollEventLogToBottom();
     }
   }
 
   userItemInput(player) {
-    $('.itemUseModal').show();
-    $('.eventLog').append('<br>' + 'Choose an item to use');
+    $('.item_use_modal').show();
+    $('.item_use_modal').append($('<p>').addClass('item_modal_text').text('Items'));
+    $('.event_log').append('<br>' + 'A zombie has attacked you!');
+    $('.event_log').append('<br>' + 'Choose an item to use');
+    this.scrollEventLogToBottom();
     for(var item in player.items) {
-      $('.itemUseModal').append($('<div>').attr('id', item).addClass('itemModal'));
-      $('.itemModal').on('click', this.returnItemChosen);
+      $('.item_use_modal').append($('<div>').attr('id', item).addClass('item_modal'));
+      $('.item_modal').on('click', this.returnItemChosen);
     }
   }
 
   returnItemChosen(event) {
-    $('.itemUseModal').hide();
+    $('.item_use_modal').hide();
+    $('.item_use_modal').empty();
     itemUsed = $(event.currentTarget).attr('id')
   }
 
@@ -185,12 +202,20 @@ class Game {
 
   resetGame() {
     $('.tile').remove();
+    $('.event_log').empty();
     game = new Game();
-    $('.playerBoxContainer').empty();
+    board = new BoardView();
+    $('.player_box_container').empty();
     $('.rollbox').off('click');
     $('.tile').off('click');
     $('#play_again_button').off('click');
+    $('.new_player').off('click');
     tileIDCounter = 0;
-    drawBoard();
+    game.start();
+  }
+
+  scrollEventLogToBottom() {
+    var eventLog = document.getElementById('event_log');
+    eventLog.scrollTop = eventLog.scrollHeight;
   }
 }

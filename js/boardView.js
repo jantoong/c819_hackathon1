@@ -1,9 +1,9 @@
+var tileIDCounter = 0;
 var tileList = {};
 
-class CreateBoard{
+class BoardView{
   constructor() {
     this.numberOfTilesInRings = [1, 4, 4, 16, 4, 24, 4, 32, 4, 4, 4];
-    this.radius = null;
     this.translateXValues = [];
     this.translateYValues = [];
     this.rotateValues = [];
@@ -12,8 +12,7 @@ class CreateBoard{
   }
 
   calculateRadius(ringNumber) {
-    this.radius = (this.baseRadius + this.radiusDelta * ringNumber) / 2;
-    return this.radius;
+    return (this.baseRadius + this.radiusDelta * ringNumber) / 2;
   }
 
   calculateXValues(ringNumber) {
@@ -86,28 +85,32 @@ class CreateBoard{
   }
 
   resetProperties() {
-    this.radius = null;
     this.translateXValues = [];
     this.translateYValues = [];
     this.rotateValues = [];
   }
 
-  makeTileRing(ringNumber) {
+  makeTileRing(ringNumber, appendTarget) {
     for (var i = 0; i < this.numberOfTilesInRings[ringNumber]; i++) {
-      var newTile = $('<div>').addClass('tile').attr('id', 'tile' + tileIDCounter);//.text(tileIDCounter);
+      var newTile = $('<div>').addClass('tile').attr('id', 'tile' + tileIDCounter);
       newTile.css('transform', 'translate(' + this.calculateXValues(ringNumber)[i] + 'px ,' + this.calculateYValues(ringNumber)[i] + 'px) rotate(' + this.calculateRotateValues(ringNumber)[i] + 'deg)');
       var newTileObj = new Tile(tileIDCounter);
       newTileObj.domElement = newTile;
       tileList['tile' + tileIDCounter] = newTileObj;
-      $('#ring' + ringNumber).append(newTile);
+      appendTarget.append(newTile);
       tileIDCounter++;
     }
+    return appendTarget;
   }
 
   makeAllRings() {
+    var innerRing = $('<div>').addClass('ring').addClass('ring' + 0).attr('id', "ring" + 0);
     for (var i = 0; i < this.numberOfTilesInRings.length; i++) {
-      this.makeTileRing(i);
+      this.makeTileRing(i, innerRing);
+      console.log(innerRing);
+      innerRing = $('<div>').addClass('ring').addClass('ring' + (i + 1)).attr('id', "ring" + (i + 1)).append(innerRing)
       this.resetProperties();
     }
+    innerRing.appendTo('.board_area');
   }
 }

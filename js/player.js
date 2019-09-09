@@ -6,17 +6,19 @@ class Player {
     this.items = {};
     this.location = null;
     this.locationDomElement = null;
+    this.playerBoxDomElement = null;
     this.renderPlayer = this.renderPlayer.bind(this);
     this.useItem = this.useItem.bind(this);
   }
 
   renderPlayer(startingLocation) {
     var target = startingLocation;
-    this.domElement = $('<div>').attr('id', '' + this.name).addClass('playerIcon');
+    this.domElement = $('<div>').attr('id', '' + this.name).addClass('player_icon').text(this.name);
     this.domElement.css('background-image', 'url(../assets/player.png)');
     target.append(this.domElement);
     this.locationDomElement = this.domElement.parent;
     this.location = tileList['tile0'];
+    this.playerBoxDomElement = $('<div>').addClass('player_box').addClass('player' + (game.players.length + 1)).text('Player ' + (game.players.length + 1)).appendTo($('.player_box_container'));
     }
 
   winCheck() {
@@ -24,20 +26,9 @@ class Player {
     if (locationId === 0 && this.items['batteries']) {
       $('#win_message').text(this.name + ' has won!');
       game.displayWinModal();
-      $('.eventLog').append('<br>' + this.name + ' has won!')
+      $('.event_log').append('<br>' + this.name + ' has won!')
+      game.scrollEventLogToBottom();
     }
-  }
-
-  getLocation() {
-    return this.location;
-  }
-
-  getItems() {
-    return this.items;
-  }
-
-  getDomElement() {
-    return this.domElement;
   }
 
   moveInDirection(tileID) {
@@ -59,7 +50,8 @@ class Player {
       }
     } else {
 
-      $('.eventLog').append('<br>' + 'Cant move that way!');
+      $('.event_log').append('<br>' + 'Cant move that way!');
+      game.scrollEventLogToBottom();
       return false;
 
     }
@@ -74,7 +66,7 @@ class Player {
       this.items[key] = 1;
       delete this.location.item[key];
       this.location.domElement.find('#' + key).hide();
-      $('.' + this.name).append($('<div>').attr('id', key).addClass('playerItem'));
+      $('.' + this.name).append($('<div>').attr('id', key).addClass('player_item'));
     }
   }
 
@@ -87,7 +79,8 @@ class Player {
       $('.' + this.name).find('#' + itemUsed).remove();
       switch(itemUsed) {
         case 'torch':
-          $('.eventLog').append('<br>' + this.name + ' has used a torch!');
+          $('.event_log').append('<br>' + this.name + ' has used a torch!');
+          game.scrollEventLogToBottom();
           for(var index = 0; index < 2; index++) {
             var directions = this.location.checkDirections();
             var randomDirection = directions[Math.floor((Math.random()*directions.length))];
@@ -95,7 +88,8 @@ class Player {
           }
           break;
         case 'bat':
-          $('.eventLog').append('<br>' + this.name + ' has used a bat!');
+          $('.event_log').append('<br>' + this.name + ' has used a bat!');
+          game.scrollEventLogToBottom();
           for (var index = 0; index < 4; index++) {
             var directions = this.location.checkDirections();
             var randomDirection = directions[Math.floor((Math.random() * directions.length))];
@@ -103,7 +97,8 @@ class Player {
           }
           break;
         case 'shovel':
-          $('.eventLog').append('<br>' + this.name + ' has used a shovel!');
+          $('.event_log').append('<br>' + this.name + ' has used a shovel!');
+          game.scrollEventLogToBottom();
           for (var index = 0; index < 3; index++) {
             var directions = this.location.checkDirections();
             var randomDirection = directions[Math.floor((Math.random() * directions.length))];
@@ -111,8 +106,9 @@ class Player {
           }
           break;
         case 'shotgun':
-          $('.eventLog').append('<br>' + this.name + ' has killed a zombie!');
-          this.location.domElement.find('.zombieIcon').remove();
+          $('.event_log').append('<br>' + this.name + ' has killed a zombie!');
+          game.scrollEventLogToBottom();
+          this.location.domElement.find('.zombie_icon').remove();
           this.location.removeEntity(zombie);
           break;
       }
@@ -130,7 +126,7 @@ class Zombie extends Player {
 
   renderZombie(startingLocation) {
     var target = startingLocation;
-    this.domElement = $('<div>').attr('id', '' + this.name).addClass('zombieIcon');
+    this.domElement = $('<div>').attr('id', '' + this.name).addClass('zombie_icon');
     this.domElement.css('background-image', 'url(../assets/zombie.png)');
     target.append(this.domElement);
     this.locationDomElement = this.domElement.position();
