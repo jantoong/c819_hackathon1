@@ -1,5 +1,6 @@
 class Player {
-  constructor(name) {
+  constructor(name, eventLog) {
+    this.eventLog = eventLog;
     this.name = name;
     this.domElement = null;
     this.playerID = null;
@@ -26,8 +27,8 @@ class Player {
     if (locationId === 0 && this.items['batteries']) {
       $('#win_message').text(this.name + ' has won!');
       game.displayWinModal();
-      $('.event_log').append('<br>' + this.name + ' has won!')
-      game.scrollEventLogToBottom();
+      this.eventLog.append(this.name + ' has won!')
+
     }
   }
 
@@ -50,8 +51,8 @@ class Player {
       }
     } else {
 
-      $('.event_log').append('<br>' + 'Cant move that way!');
-      game.scrollEventLogToBottom();
+      this.eventLog.append('Cant move that way!');
+
       return false;
 
     }
@@ -71,47 +72,35 @@ class Player {
   }
 
   useItem(zombie) {
+    if (itemUsed === 'shotgun') {
+      this.eventLog.append(this.name + ' has killed a zombie!');
+
+      this.location.domElement.find('.zombie_icon').remove();
+      this.location.removeEntity(zombie);
+    } else {
+
+    }
+    $('.' + this.name).find('#' + itemUsed).remove();
+
+    var escapePower = {
+      torch: 2,
+      bat: 4,
+      shovel: 3
+    };
+    var escapeSteps = escapePower[itemUsed]
+    this.eventLog.append(this.name + ' has used a ' + itemUsed + '!');
+
+    for (var index = 0; index < escapeSteps; index++) {
+      var directions = this.location.checkDirections();
+      var randomDirection = directions[Math.floor((Math.random() * directions.length))];
+      this.moveInDirection('tile' + randomDirection);
+    }
+
+    this.items[itemUsed]--;
     if (this.items[itemUsed] === 0) {
       delete this.items[itemUsed];
       $('.' + this.name).find('#' + itemUsed).remove();
-    } else {
-      this.items[itemUsed]--;
-      $('.' + this.name).find('#' + itemUsed).remove();
-      switch(itemUsed) {
-        case 'torch':
-          $('.event_log').append('<br>' + this.name + ' has used a torch!');
-          game.scrollEventLogToBottom();
-          for(var index = 0; index < 2; index++) {
-            var directions = this.location.checkDirections();
-            var randomDirection = directions[Math.floor((Math.random()*directions.length))];
-            this.moveInDirection('tile' +randomDirection);
-          }
-          break;
-        case 'bat':
-          $('.event_log').append('<br>' + this.name + ' has used a bat!');
-          game.scrollEventLogToBottom();
-          for (var index = 0; index < 4; index++) {
-            var directions = this.location.checkDirections();
-            var randomDirection = directions[Math.floor((Math.random() * directions.length))];
-            this.moveInDirection('tile'+randomDirection);
-          }
-          break;
-        case 'shovel':
-          $('.event_log').append('<br>' + this.name + ' has used a shovel!');
-          game.scrollEventLogToBottom();
-          for (var index = 0; index < 3; index++) {
-            var directions = this.location.checkDirections();
-            var randomDirection = directions[Math.floor((Math.random() * directions.length))];
-            this.moveInDirection('tile' +randomDirection);
-          }
-          break;
-        case 'shotgun':
-          $('.event_log').append('<br>' + this.name + ' has killed a zombie!');
-          game.scrollEventLogToBottom();
-          this.location.domElement.find('.zombie_icon').remove();
-          this.location.removeEntity(zombie);
-          break;
-      }
+      return;
     }
   }
 
@@ -148,7 +137,7 @@ class Zombie extends Player {
       for(var player of playerArr) {
         if(Object.keys(player.items).length !== 0) {
           game.userItemInput(player);
-          setTimeout(function () { player.useItem(this) }, 2000);
+          // setTimeout(function () { player.useItem(this) }, 2000);
         } else {
           game.killPlayer(player);
         }

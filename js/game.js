@@ -1,5 +1,6 @@
 class Game {
-  constructor() {
+  constructor(eventLog) {
+    this.eventLog = eventLog;
     this.players = [];
     this.zombies = [];
     this.currentPlayer = null;
@@ -22,7 +23,7 @@ class Game {
     this.currentPlayer = this.players[0];
     $('.new_player').on('click', this.createNewPlayer);
     $('.tile').on('click', this.tileClickHandler);
-    $('.event_log').append('<br>' + this.players[0].name + "'s turn to roll!");
+    this.eventLog.append(this.players[0].name + "'s turn to roll!");
     $('.player_box.player1').toggleClass('turn');
   }
 
@@ -32,8 +33,8 @@ class Game {
     for (var entity of tileList[target].entities) {
       for (var zombie of this.zombies) {
         if (entity === zombie) {
-          $('.event_log').append('<br>' + "Can't go that way!");
-          this.scrollEventLogToBottom();
+          this.eventLog.append("Can't go that way!");
+
           return;
         }
       }
@@ -55,8 +56,8 @@ class Game {
   diceRoll() {
     var result = Math.floor(Math.random() * 6) + 1;
     this.displayDiceRollIcon(result);
-    $('.event_log').append('<br>' + 'You rolled a ' + result + '. Move ' + result + ' spaces.');
-    this.scrollEventLogToBottom();
+    this.eventLog.append('You rolled a ' + result + '. Move ' + result + ' spaces.');
+
     this.movementCounter = result;
     return result;
   }
@@ -94,7 +95,7 @@ class Game {
     var zombieCounter = 1;
 
     for (var tile of zombieStartingTile) {
-      var newZombie = new Zombie('zombie' + zombieCounter);
+      var newZombie = new Zombie('zombie' + zombieCounter, this.eventLog);
       newZombie.location = tileList[tile];
       tileList[tile].entities.push(newZombie);
       newZombie.renderZombie($('#' + tile));
@@ -103,8 +104,8 @@ class Game {
   }
 
   createNewPlayer() {
-    var newPlayer = new Player('player' + (game.players.length + 1));
-    $('.event_log').append('<br>' + newPlayer.name + ' has joined!');
+    var newPlayer = new Player('player' + (game.players.length + 1), this.eventLog);
+    this.eventLog.append(newPlayer.name + ' has joined!');
     var target = $('#tile0');
     tileList['tile0'].entities.push(newPlayer);
     newPlayer.renderPlayer(target);
@@ -135,8 +136,8 @@ class Game {
     } else {
       this.currentPlayer = this.players[this.players.indexOf(this.currentPlayer) + 1];
     }
-    $('.event_log').append('<br>' + this.currentPlayer.name +"'s turn to roll!");
-    this.scrollEventLogToBottom();
+    this.eventLog.append(this.currentPlayer.name +"'s turn to roll!");
+
     $(this.currentPlayer.playerBoxDomElement).toggleClass('turn');
   }
 
@@ -158,8 +159,8 @@ class Game {
   }
 
   killPlayer(player) {
-    $('.event_log').append('<br>' + player.name + ' has been eaten!');
-    this.scrollEventLogToBottom();
+    this.eventLog.append(player.name + ' has been eaten!');
+
     $('.' + player.name).css('text-decoration', 'line-through');
     player.domElement.remove();
     player.location.removeEntity(player);
@@ -169,17 +170,17 @@ class Game {
 
   gameOverCheck() {
     if(this.players.length === 0) {
-      $('.event_log').append('<br>' + 'Game Over');
-      this.scrollEventLogToBottom();
+      this.eventLog.append('Game Over');
+
     }
   }
 
   userItemInput(player) {
     $('.item_use_modal').show();
     $('.item_use_modal').append($('<p>').addClass('item_modal_text').text('Items'));
-    $('.event_log').append('<br>' + 'A zombie has attacked you!');
-    $('.event_log').append('<br>' + 'Choose an item to use');
-    this.scrollEventLogToBottom();
+    this.eventLog.append('A zombie has attacked you!');
+    this.eventLog.append('Choose an item to use');
+
     for(var item in player.items) {
       $('.item_use_modal').append($('<div>').attr('id', item).addClass('item_modal'));
       $('.item_modal').on('click', this.returnItemChosen);
@@ -212,10 +213,5 @@ class Game {
     $('.new_player').off('click');
     tileIDCounter = 0;
     game.start();
-  }
-
-  scrollEventLogToBottom() {
-    var eventLog = document.getElementById('event_log');
-    eventLog.scrollTop = eventLog.scrollHeight;
   }
 }
